@@ -4,3 +4,4 @@ SAE_23_Intranet_entreprise
 ## Branche de FEATURE
 
 - Owen Deschamps
+- Liam Beneat
