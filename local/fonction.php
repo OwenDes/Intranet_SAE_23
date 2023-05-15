@@ -24,7 +24,7 @@ function pageheader_1() {
             <header>
                 <div class="row">
                   <div class="col-1">
-                    <div class="container mt-1 ms-1">
+                    <div class="container mt-1">
                       <a href="../page/page0.php">
                         <img class="images-fluid rounded-circle" style="max-height: 100px;" src="../images/logo.png">
                       </a>
@@ -60,19 +60,19 @@ function pageheader_2() {
           <header>
               <div class="row">
                 <div class="col-1">
-                  <div class="container mt-1 ms-1">
+                  <div class="container my-1 my-1">
                     <a href="../page/page0.php">
                       <img class="images-fluid rounded-circle" style="max-height: 100px;" src="../images/logo.png">
                     </a>
                   </div>
                 </div>
                 <div class="col-xl-9">
-                  <div class="container-fluid mt-3 text-white">
+                  <div class="container-fluid my-3 text-white">
                       <h2>Service National d’Incendie et de Secours du Listenbourg</h2>
                   </div>
                 </div>
                 <div class="col-sm-2">
-                  <div class="container rounded text-end mt-4 mb-2 me-1">';
+                  <div class="container rounded text-end my-4">';
                   session_start();
                   if(isset($_SESSION['nom'])){
                      echo '<button type="button" class="btn"><a href="../traitement/deconnexion_traitement.php" class="text-white text-decoration-none">Déconnexion <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a></button>
@@ -88,7 +88,7 @@ function pageheader_2() {
               <div class="row">
                   <nav class="navbar col-9 navbar-expand-lg">
                   <div class="container">
-                      <a class="navbar-brand ms-2 text-white" href="../page/page0.php"><i class="fa-solid fa-house" style="color: #fcfcfc;"></i></a>
+                      <a class="navbar-brand my-2 text-white" href="../page/page0.php"><i class="fa-solid fa-house" style="color: #fcfcfc;"></i></a>
                       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                       </button>
