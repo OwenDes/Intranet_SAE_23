@@ -130,9 +130,9 @@ function pagefooter() {
                 <p>© 2023 NDIS | Tous droits réservés | <a class="text-white" href="../page/mention_legale.php">Mention légales</a> | <a class="text-white" href="mailto:contact.email@snis.fr">Nous contacter</a></p>
               </div>
               <div class="col-3 ">
-                <div class="container text-center">
+                <div class="container text-center text-white"">
                   <p>Suivez-nous sur les réseaux sociaux</p>
-                      <h3><i class="fa-brands fa-facebook" style="margin-right: 10px; margin-right: 10px";></i><i class="fa-brands fa-instagram" style="margin-right: 10px; margin-right: 10px";></i><i class="fa-brands fa-twitter" style="margin-right: 10px; margin-right: 10px";></i><i class="fa-brands fa-linkedin" style="color: #ffffff; margin-right: 10px";></i></h3>
+                      <h3><i class="fa-brands fa-facebook" style="margin-right: 10px; margin-right: 10px";></i><a  href="https://www.instagram.com/_liamplay_/"><i class="fa-brands fa-instagram" style="margin-right: 10px; margin-right: 10px";></a></i><i class="fa-brands fa-twitter" style="margin-right: 10px; margin-right: 10px";></i><i class="fa-brands fa-linkedin" style="color: #ffffff; margin-right: 10px";></i></h3>
                 </div>
               </div>
               <div class="col">
