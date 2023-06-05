@@ -1,0 +1,17 @@
+{
+    "1": {
+        "titre": "Recherche de nouvelles recrues",
+        "contenu": "Le Service National d'Incendie et de Secours est \u00e0 la recherche de nouveaux recrues pour r\u00e9pondre aux besoins croissants en mati\u00e8re de s\u00e9curit\u00e9 incendie dans le pays.",
+        "lien": "page0.php"
+    },
+    "2": {
+        "titre": "Campagne de sensibilisation",
+        "contenu": "Le Service National d'Incendie et de Secours a lanc\u00e9 une campagne de sensibilisation pour rappeler aux gens de ne pas utiliser de feux d'artifice ou d'autres produits inflammables \u00e0 proximit\u00e9 de leur maison pendant les f\u00eates nationales.",
+        "lien": "#"
+    },
+    "3": {
+        "titre": "Mise en place un nouveau programme de formation",
+        "contenu": "Le Service National d'Incendie et de Secours a r\u00e9cemment mis en place un nouveau programme de formation pour les pompiers afin de les aider \u00e0 mieux faire face aux incendies dans les b\u00e2timents \u00e0 grande hauteur.",
+        "lien": "#"
+    }
+}
