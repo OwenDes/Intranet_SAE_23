@@ -48,7 +48,7 @@ function navbar_Intranet(){
                             <a class="nav-link text-dark" href="../traitement/deconnexion_traitement">Déconnexion</a>
                         </li>
                         <li class="nav-item border">
-                            <a class="nav-link text-dark" href="#">Paramètre</a>
+                            <a class="nav-link text-dark" href="#">Paramètres</a>
                         </li>
                     </ul>
                 </div>
