@@ -26,13 +26,13 @@ function pageheader_1() {
           <div class="row">
               <div class="col">
                   <div class="container mt-1">
-                      <a href="http://php/Sa%c3%a9%2024/Projet-Sae/Frontal/page/page0.php">
+                      <a href="../page/page0.php">
                           <img class="img-fluid rounded-circle" style="max-height: 100px;" src="../images/logo.png">
                       </a>
                   </div>
               </div>
               <div class="col-xl-9">
-                  <div class="container-fluid my-3 text-white ">
+                  <div class="container-fluid my-3 text-white">
                       <h2>Service National d’Incendie et de Secours du Listenbourg</h2>
                   </div>
               </div>
@@ -40,18 +40,18 @@ function pageheader_1() {
           </div>
               <div class="row">
                   <div class="col">
-                  <h2><a href="../Frontal/page/page0.php" style="text-decoration: none; color: white;"><i class="fa-solid fa-house" style="color: #fcfcfc; margin-left: 10px;"></i></a></h2>
+                  <h2><a href="../page/page0.php" style="text-decoration: none; color: white;"><i class="fa-solid fa-house" style="color: #fcfcfc; margin-left: 10px;"></i></a></h2>
                   </div>
                   <div class="col">
                       <div class="container rounded text-end">';
                       session_start();
                       if(isset($_SESSION['nom'])){
-                         echo '<button type="button" class="btn"><a href="http://php/Sa%c3%a9%2024/Projet-Sae/Intranet/traitement/deconnexion_traitement.php" class="text-white text-decoration-none">Déconnexion <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a></button>
+                         echo '<button type="button" class="btn"><a href="../../Intranet/traitement/deconnexion_traitement.php" class="text-white text-decoration-none">Déconnexion <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a></button>
                          <br>
-                         <button type="button" class="btn"><a href="http://php/Sa%c3%a9%2024/Projet-Sae/Intranet/page/gestion.php" class="text-white text-decoration-none">Gestion</a></button>';
+                         <button type="button" class="btn"><a href="../../Intranet/page/gestion.php" class="text-white text-decoration-none">Gestion</a></button>';
                       }
                       else{ 
-                         echo '<button type="button" class="btn"><a href="http://php/Sa%c3%a9%2024/Projet-Sae/Intranet/page/connexion.php" class="text-white text-decoration-none"><i class="fa-solid fa-user" style="color: #ffffff;"></i> Connexion</a></button>';
+                         echo '<button type="button" class="btn"><a href="../../../Intranet/page/connexion.php" class="text-white text-decoration-none"><i class="fa-solid fa-user" style="color: #ffffff;"></i> Connexion</a></button>';
                       }
                       echo '
                       </div>
@@ -68,7 +68,7 @@ function pageheader_2() {
       <div class="row">
         <div class="col">
           <div class="container my-1">
-            <a href="http://php/Sa%c3%a9%2024/Projet-Sae/Frontal/page/page0.php">
+            <a href="../page/page0.php">
               <img class="img-fluid rounded-circle" style="max-height: 100px;" src="../images/logo.png">
             </a>
           </div>
@@ -80,7 +80,7 @@ function pageheader_2() {
         </div>          
         </div>
           <nav class="navbar navbar-expand-lg">
-                    <a class="navbar-brand text-white" href="/Saé 24/Projet-Saé//Frontal/page/page0.php"><i class="fa-solid fa-house" style="color: #fcfcfc;"></i></a>
+                    <a class="navbar-brand text-white" href="../page/page0.php"><i class="fa-solid fa-house" style="color: #fcfcfc;"></i></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -100,12 +100,8 @@ function pageheader_2() {
                             <li><a class="dropdown-item" href="Organisation_sur_le_territoire.php">Organisation sur le territoire</a></li>
                             <li><a class="dropdown-item" href="interventions.php">Nos interventions</a></li>
                             <li><a class="dropdown-item" href="Préventions_et_révisions.php">Préventions et révisions</a></li>
-                        </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">LOL</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="partenaire.php">Partenaire</a></li>
+                            <li><a class="dropdown-item" href="partenaire.php">Partenaire</a></li>
+                            <li><a class="dropdown-item" href="notre_histoire.php">Notre histoire</a></li>
                         </ul>
                         </li>
                     </ul>
@@ -115,12 +111,12 @@ function pageheader_2() {
                         <div class="container text-end">';
                                     
                   if(isset($_SESSION['nom'])){
-                     echo '<button type="button" class="btn"><a href="http://php/Sa%c3%a9%2024/Projet-Sae/Intranet/traitement/deconnexion_traitement.php" class="text-white text-decoration-none">Déconnexion <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a></button>
+                     echo '<button type="button" class="btn"><a href="../../Intranet/traitement/deconnexion_traitement.php" class="text-white text-decoration-none">Déconnexion <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a></button>
                      <br>
-                     <button type="button" class="btn"><a href="http://php/Sa%c3%a9%2024/Projet-Sae/Intranet/page/gestion.php" class="text-white text-decoration-none">Gestion</a></button>';
+                     <button type="button" class="btn"><a href="../../Intranet/page/gestion.php" class="text-white text-decoration-none">Gestion</a></button>';
                   }
                   else{ 
-                     echo '<button type="button" class="btn"><a href="http://php/Sa%c3%a9%2024/Projet-Sae/Intranet/page/connexion.php" class="text-white text-decoration-none"><i class="fa-solid fa-user" style="color: #ffffff;"></i> Connexion</a></button>';
+                     echo '<button type="button" class="btn"><a href="../../Intranet/page/connexion.php" class="text-white text-decoration-none"><i class="fa-solid fa-user" style="color: #ffffff;"></i> Connexion</a></button>';
                   }
                         echo' </div>
                     </div>
@@ -152,7 +148,7 @@ function pagefooter() {
               </div>
               <div class="col">
                 <div class="container mt-1 me-4">
-                  <a href="http://php/Sa%c3%a9%2024/Projet-Sae/Frontal/page/page0.php">
+                  <a href="../page/page0.php">
                     <img class="img-fluid rounded-circle float-end" style="max-height: 100px;" src="../images/logo.png">
                   </a>
                 </div>
