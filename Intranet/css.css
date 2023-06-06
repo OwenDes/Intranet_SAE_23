@@ -1,0 +1,14 @@
+body {
+    overflow-x: hidden;
+  }
+  .actualite1 {
+    background: #0066b2;
+  }
+  
+  .actualite2 {
+    background: #00308F;
+  }
+  
+  .actualite3 {
+    background: #002D62;
+  }
