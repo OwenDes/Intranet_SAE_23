@@ -111,9 +111,8 @@ function pageheader_2() {
                         <div class="container text-end">';
                                     
                   if(isset($_SESSION['nom'])){
-                     echo '<button type="button" class="btn"><a href="../../Intranet/traitement/deconnexion_traitement.php" class="text-white text-decoration-none">Déconnexion <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a></button>
-                     <br>
-                     <button type="button" class="btn"><a href="../../Intranet/page/gestion.php" class="text-white text-decoration-none">Gestion</a></button>';
+                     echo '
+                     <button type="button" class="btn"><a href="../../Intranet/page/Intranet.php" class="text-white text-decoration-none">Retour vers l\'intranet</a></button>';
                   }
                   else{ 
                      echo '<button type="button" class="btn"><a href="../../Intranet/page/connexion.php" class="text-white text-decoration-none"><i class="fa-solid fa-user" style="color: #ffffff;"></i> Connexion</a></button>';
