@@ -13,7 +13,7 @@ function header_Intranet() {
         <script src="https://kit.fontawesome.com/95567607c9.js" crossorigin="anonymous"></script>
         <link rel="icon" href="../images/logo.png">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="css.css">
+        <link rel="stylesheet" type="text/css" href="../css.css">
         <title>SNIS du Listenbourg</title>
     </head>';
     echo'<body class="bg-light">
@@ -48,7 +48,7 @@ function navbar_Intranet(){
                             <a class="nav-link text-dark" href="../traitement/deconnexion_traitement">Déconnexion</a>
                         </li>
                         <li class="nav-item border">
-                            <a class="nav-link text-dark" href="#">Paramètre</a>
+                            <a class="nav-link text-dark" href="#">Paramètres</a>
                         </li>
                     </ul>
                 </div>
