@@ -29,7 +29,12 @@ $htmlContent .=
     '</tbody>
   </table>
   <div class="container d-flex justify-content-center">
-    <a href="../traitement/pdf_traitement.php">Télécharger le PDF</a>
+  <a href="../traitement/pdf_traitement.php"><button id="bouton-spinner" class="btn btn-primary">Télécharger le PDF</button></a>
+  <div id="spinner" class="spinner-border spinner-border-sm" style="display: none;"></div>
+  <script src="../js/spinner.js"></script>
+    
+
+
   </div>
 </div>';
 
