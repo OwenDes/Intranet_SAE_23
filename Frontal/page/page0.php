@@ -54,7 +54,7 @@
             </div>
           </div>
           <?php
-$donnees_json = file_get_contents("../données/actualites.json");
+$donnees_json = file_get_contents("../../Intranet/données/actualites.json");
 $actualites = json_decode($donnees_json, true);
 
 if ($actualites === null) {

@@ -19,7 +19,7 @@ function header_Intranet() {
     echo'<body class="bg-light">
         <div class="col main-content text-center">
             <div class="horizontal p-2 mt-3 shadow-sm bg-white container-fluid">
-                <img class="img-fluid rounded-circle" src="../images/logo.png" alt="Logo" width="100" height="100">
+                <a href="Intranet.php"><img class="img-fluid rounded-circle" src="../images/logo.png" alt="Logo" width="100" height="100"></a>
             </div>
         </div>';}
 
@@ -54,12 +54,10 @@ function navbar_Intranet(){
                 </div>
                 <div>
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="container text-center">
-                                <img class="img-fluid rounded-circle"src="../images/logo.png" alt="Logo" width="100" height="100">
-                                <p>Suivez-nous sur les réseaux sociaux :</p>
-                                <h3><i class="fa-brands fa-facebook ms-2"></i><i class="fa-brands fa-instagram ms-3"></i><i class="fa-brands fa-twitter ms-3"></i><i class="fa-brands fa-linkedin ms-3"></i></h3>
-                            </div>
+                        <div class="container text-center">
+                            <a href="Intranet.php"><img class="img-fluid rounded-circle my-2"src="../images/logo.png" alt="Logo" width="100" height="100"></a>
+                            <p>Suivez-nous sur les réseaux sociaux :</p>
+                            <h3><i class="fa-brands fa-facebook" style="margin-right: 10px; margin-right: 10px";></i><a class="text-black" href="https://www.instagram.com/pompiers.du.listenbourg/"><i class="fa-brands fa-instagram" style="margin-right: 10px; margin-right: 10px";></a></i><a class="text-black"  href="https://twitter.com/PompiersLB"><i class="fa-brands fa-twitter" style="margin-right: 10px; margin-right: 10px";></i></a><i class="fa-brands fa-linkedin" margin-right: 10px";></i></h3>
                         </div>
                     </div>
                 </div>
@@ -82,7 +80,7 @@ function pagefooter_Intranet() {
             </div>
             <div class="col">
               <div class="container">
-                <a href="/Intranet.php">
+                <a href="Intranet.php">
                   <img class="images-fluid rounded-circle float-end" style="max-height: 100px;" src="../images/logo.png">
                 </a>
               </div>
