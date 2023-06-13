@@ -51,7 +51,7 @@
                             </a>
                         </div>
                         <div class="col">
-                            <a href="#">
+                            <a href="Wiki.php">
                                 <img class="img-fluid rounded-circle" src="../images/Wiki.png" alt="Logo">
                             </a>
                         </div>
