@@ -3,7 +3,7 @@
 $user = $_POST['login'];
 $mdp = $_POST['motdepasse'];
 
-$json = file_get_contents('../données/users.json');
+$json = file_get_contents('../données/contacts.json');
 $data = json_decode($json, true);
 
 foreach ($data as $key => $value) {
@@ -14,7 +14,8 @@ foreach ($data as $key => $value) {
         exit;
     }
 }
-header('Location: connexion.php');
+echo "pas ok";
+// header('Location: ../page/connexion.php');
 exit;
 
 ?>
