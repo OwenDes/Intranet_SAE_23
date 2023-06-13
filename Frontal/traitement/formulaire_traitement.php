@@ -19,6 +19,7 @@ $messages[] = $newMessage;
 
 $json = json_encode($messages, JSON_PRETTY_PRINT);
 
+
 file_put_contents('../../Intranet/données/formulaire.json', $json);
 
 header('Location: ../page/confirmation.php');
