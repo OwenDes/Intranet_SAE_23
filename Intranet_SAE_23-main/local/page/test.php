@@ -1,1 +1,0 @@
-<?php include '../fonction.php'; head() ; pageheader_2() ?>
