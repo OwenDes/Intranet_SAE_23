@@ -19,7 +19,7 @@ function header_Intranet() {
     echo'<body class="bg-light">
         <div class="col main-content text-center">
             <div class="horizontal p-2 mt-3 shadow-sm bg-white container-fluid">
-                <a href="Intranet.php"><img class="img-fluid rounded-circle" src="../images/logo.png" alt="Logo" width="100" height="100"></a>
+                <a href="../page/Intranet.php"><img class="img-fluid rounded-circle" src="../images/logo.png" alt="Logo" width="100" height="100"></a>
             </div>
         </div>';}
 
