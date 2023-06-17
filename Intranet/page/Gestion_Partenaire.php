@@ -1,7 +1,9 @@
 <?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet();
+
+$uploadDir = 'C:/Users/Alex/Desktop/SAE 23 SNIS/Intranet_SAE_23/Intranet/images/Upload/'; // Répertoire de destination des images
+
 if (isset($_POST['submit'])) {
-    $uploadDir = 'C:/Users/Alex/Desktop/SAE 23 SNIS/Intranet_SAE_23/Intranet/images/Upload/'; // Répertoire de destination des images
-    $allowedExtensions = array('jpg', 'jpeg', 'png'); // Extensions de fichiers autorisées
+    $allowedExtensions = array('png'); // Extensions de fichiers autorisées
 
     $fileNames = array_filter($_FILES['images']['name']);
 
@@ -12,7 +14,7 @@ if (isset($_POST['submit'])) {
             $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
             if (in_array($fileExt, $allowedExtensions)) {
-                $newFileName = $fileName;
+                $newFileName = uniqid('image_') . '.' . $fileExt;
                 $destination = $uploadDir . $newFileName;
 
                 if (move_uploaded_file($fileTmp, $destination)) {
