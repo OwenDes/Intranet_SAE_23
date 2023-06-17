@@ -29,37 +29,6 @@ if (isset($_POST['submit'])) {
         echo 'Veuillez sélectionner au moins une image à télécharger.<br>';
     }
 }
-$uploadDir = 'C:/Users/Alex/Desktop/SAE 23 SNIS/Intranet_SAE_23/Intranet/images/Upload/'; // Répertoire de destination des images
-
-if (isset($_POST['submit'])) {
-    $allowedExtensions = array('png'); // Extensions de fichiers autorisées
-
-    $fileNames = array_filter($_FILES['images']['name']);
-
-    if (!empty($fileNames)) {
-        foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
-            $fileName = $_FILES['images']['name'][$key];
-            $fileTmp = $_FILES['images']['tmp_name'][$key];
-            $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-            if (in_array($fileExt, $allowedExtensions)) {
-                $newFileName = uniqid('image_') . '.' . $fileExt;
-                $destination = $uploadDir . $newFileName;
-
-                if (move_uploaded_file($fileTmp, $destination)) {
-                    // Le fichier a été téléchargé avec succès, vous pouvez effectuer d'autres opérations ici si nécessaire
-                    echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
-                } else {
-                    echo 'Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.<br>';
-                }
-            } else {
-                echo 'Le fichier ' . $fileName . ' n\'est pas une image valide.<br>';
-            }
-        }
-    } else {
-        echo 'Veuillez sélectionner au moins une image à télécharger.<br>';
-    }
-}
 
 if (isset($_GET['delete'])) {
     $imageToDelete = $_GET['delete'];
