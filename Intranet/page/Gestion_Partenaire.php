@@ -64,6 +64,61 @@ if (!empty($uploadedImages)) {
     echo '</div>';
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $description = $_POST['description'];
+  
+    $data = array(
+      'description' => $description,
+    );
+  
+    $jsonFile = '../données/Partenaires.json';
+  
+    $currentData = file_get_contents($jsonFile);
+    $currentData = json_decode($currentData, true);
+  
+    $currentData[] = $data;
+  
+    $jsonData = json_encode($currentData);
+  
+    file_put_contents($jsonFile, $jsonData);
+  
+    echo 'Description enregistrée avec succès !';
+  }
+
+  $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
+
+if (!empty($partnerData)) {
+    echo '<h2>Descriptions des partenaires :</h2>';
+    echo '<div class="container">';
+    echo '<div class="row">';
+    foreach ($partnerData as $partner) {
+        echo '<div class="col-md-6">';
+        echo '<p>' . $partner['description'] . '</p>';
+        echo '<a href="?delete_description=' . $partner['description'] . '" class="btn btn-danger btn-sm mt-2">Supprimer</a>';
+        echo '</div>';
+    }
+    echo '</div>';
+    echo '</div>';
+}
+
+if (isset($_GET['delete_description'])) {
+    $descriptionToDelete = $_GET['delete_description'];
+  
+    $jsonFile = '../données/Partenaires.json';
+  
+    $currentData = file_get_contents($jsonFile);
+    $currentData = json_decode($currentData, true);
+  
+    $filteredData = array_filter($currentData, function ($item) use ($descriptionToDelete) {
+        return $item['description'] !== $descriptionToDelete;
+    });
+  
+    $jsonData = json_encode(array_values($filteredData));
+  
+    file_put_contents($jsonFile, $jsonData);
+  
+    echo 'La description a été supprimée avec succès.';
+}
 
 ?>
 
@@ -84,7 +139,21 @@ if (!empty($uploadedImages)) {
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Envoyer</button>
         </form>
+        <div class="container">
+            <h1>Formulaire de description du partenaire</h1>
+            <form action="Gestion_Partenaire.php" method="POST">
+            <div class="form-group">
+                <label for="description">Description :</label>
+                <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     </div>
+    
 </body>
 </html>
 <?php

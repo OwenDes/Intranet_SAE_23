@@ -77,7 +77,17 @@
 ?>
     </div>
     <div class="container-fluid offset-md-2 col-sm-7 lead">
-        <p></p>
+        <p>
+            <?php
+                $jsonString = file_get_contents('C:\Users\Alex\Desktop\SAE 23 SNIS\Intranet_SAE_23\Intranet\données/Partenaires.json');
+                $data = json_decode($jsonString, true);
+                foreach ($data as $item) {
+                    if (isset($item['description'])) {
+                        echo '<p>' . $item['description'] . '</p>';
+                    }
+                }
+            ?>
+        </p>
     </div>
 </section>
 <div class="container mt-5 mb-5 text-center lead">
