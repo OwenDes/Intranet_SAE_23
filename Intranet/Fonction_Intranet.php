@@ -50,6 +50,9 @@ function navbar_Intranet(){
                         <li class="nav-item border">
                             <a class="nav-link text-dark" href="#">Paramètres</a>
                         </li>
+                        <li class="nav-item border">
+                            <a class="nav-link text-dark" href="Gestion_Partenaire.php">Gestion des partenaires</a>
+                        </li>
                     </ul>
                 </div>
                 <div>

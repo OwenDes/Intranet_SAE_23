@@ -57,6 +57,28 @@
     <div class="container-fluid offset-md-2 col-sm-7 lead">
         <p>Nous sommes fiers d'avoir la Banque Populaire comme partenaire de confiance au sein du SNIS (Service National d'Incendie et de Secours) du Listemburg.<br><br>Leur soutien financier précieux renforce notre capacité à répondre aux situations d'urgence avec efficacité. Grâce à ce partenariat, nous travaillons ensemble pour garantir la sécurité et le bien-être de notre communauté. Notre collaboration étroite nous permet de fournir des secours vitaux en temps opportun et de protéger les vies et les biens.Nous exprimons notre sincère gratitude envers la Banque Populaire pour leur engagement envers notre mission de service public.</p>
     </div>
+    <div class="container offset-md-2 pt-5 pb-4">
+<?php
+   $repertoire = 'C:/Users/Alex/Desktop/SAE 23 SNIS/Intranet_SAE_23/Frontal/images/Partenaire/Upload/';
+
+        // Récupère tous les fichiers d'images dans le répertoire
+        $images = glob($repertoire . '*.{png}', GLOB_BRACE);
+
+        // Affiche les images
+        foreach ($images as $image) {
+            $extension = pathinfo($image, PATHINFO_EXTENSION);
+            $extensionsAutorisees = array('png');
+
+            if (in_array($extension, $extensionsAutorisees)) {
+                echo '<img src="' . $repertoire . $image . '" alt="Image"><br>';
+            }
+        }
+
+?>
+    </div>
+    <div class="container-fluid offset-md-2 col-sm-7 lead">
+        <p></p>
+    </div>
 </section>
 <div class="container mt-5 mb-5 text-center lead">
         <p><strong><em>Nous sommes ravis d'annoncer l'arrivée prochaine d'un nouveau partenaire au sein du SNIS (Service National d'Incendie et de Secours) du Listemburg. Restez à l'écoute pour découvrir notre collaboration prometteuse !</em></strong></p>
