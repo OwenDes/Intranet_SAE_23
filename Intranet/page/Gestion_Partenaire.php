@@ -1,13 +1,17 @@
-<?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet();
+<?php
+include '../Fonction_Intranet.php';
+header_Intranet();
+navbar_Intranet();
 
-$uploadDir = 'C:/Users/Alex/Desktop/SAE 23 SNIS/Intranet_SAE_23/Intranet/images/Upload/'; // Répertoire de destination des images
+$uploadDir = '../../Intranet/images/Upload/'; // Répertoire de destination des images
+$counter = 1; // Compteur pour les noms de fichier
 
 if (isset($_POST['submit'])) {
     $allowedExtensions = array('png'); // Extensions de fichiers autorisées
 
     $fileNames = array_filter($_FILES['images']['name']);
 
-    if (!empty($fileNames)) {
+    if (!empty($fileNames) && !empty($_POST['description'])) {
         foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
             $fileName = $_FILES['images']['name'][$key];
             $fileTmp = $_FILES['images']['tmp_name'][$key];
@@ -15,11 +19,13 @@ if (isset($_POST['submit'])) {
 
             if (in_array($fileExt, $allowedExtensions)) {
                 $newFileName = uniqid('image_') . '.' . $fileExt;
+                $newFileName = sprintf('%02d', $counter) . '.' . $fileExt; // Utilisation de sprintf pour formater le compteur à deux chiffres
                 $destination = $uploadDir . $newFileName;
 
                 if (move_uploaded_file($fileTmp, $destination)) {
                     // Le fichier a été téléchargé avec succès, vous pouvez effectuer d'autres opérations ici si nécessaire
                     echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
+                    $counter++;
                 } else {
                     echo 'Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.<br>';
                 }
@@ -27,8 +33,23 @@ if (isset($_POST['submit'])) {
                 echo 'Le fichier ' . $fileName . ' n\'est pas une image valide.<br>';
             }
         }
+
+        $description = $_POST['description'];
+
+        $data = array(
+            'description' => $description,
+            'image' => '../../Intranet/images/Upload/' . sprintf('%02d', $counter - 1) . '.png' // Ajouter le lien de l'image
+        );
+
+        $jsonFile = '../données/Partenaires.json';
+
+        $jsonData = json_encode(array($data)); // Encapsuler la donnée dans un tableau
+
+        file_put_contents($jsonFile, $jsonData);
+
+        echo 'Description enregistrée avec succès !';
     } else {
-        echo 'Veuillez sélectionner au moins une image à télécharger.<br>';
+        echo 'Veuillez sélectionner au moins une image à télécharger et saisir une description avant de l\'enregistrer.';
     }
 }
 
@@ -45,6 +66,24 @@ if (isset($_GET['delete'])) {
     } else {
         echo 'L\'image ' . $imageToDelete . ' n\'existe pas.<br>';
     }
+}
+
+if (isset($_GET['delete_description'])) {
+    $descriptionToDelete = $_GET['delete_description'];
+
+    $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
+
+    foreach ($partnerData as $key => $partner) {
+        if ($partner['description'] === $descriptionToDelete) {
+            unset($partnerData[$key]);
+            break;
+        }
+    }
+
+    $jsonData = json_encode($partnerData);
+    file_put_contents('../données/Partenaires.json', $jsonData);
+
+    echo 'La description a été supprimée avec succès du fichier JSON.';
 }
 
 $uploadedImages = scandir($uploadDir);
@@ -64,28 +103,7 @@ if (!empty($uploadedImages)) {
     echo '</div>';
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $description = $_POST['description'];
-  
-    $data = array(
-      'description' => $description,
-    );
-  
-    $jsonFile = '../données/Partenaires.json';
-  
-    $currentData = file_get_contents($jsonFile);
-    $currentData = json_decode($currentData, true);
-  
-    $currentData[] = $data;
-  
-    $jsonData = json_encode($currentData);
-  
-    file_put_contents($jsonFile, $jsonData);
-  
-    echo 'Description enregistrée avec succès !';
-  }
-
-  $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
+$partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
 if (!empty($partnerData)) {
     echo '<h2>Descriptions des partenaires :</h2>';
@@ -99,25 +117,6 @@ if (!empty($partnerData)) {
     }
     echo '</div>';
     echo '</div>';
-}
-
-if (isset($_GET['delete_description'])) {
-    $descriptionToDelete = $_GET['delete_description'];
-  
-    $jsonFile = '../données/Partenaires.json';
-  
-    $currentData = file_get_contents($jsonFile);
-    $currentData = json_decode($currentData, true);
-  
-    $filteredData = array_filter($currentData, function ($item) use ($descriptionToDelete) {
-        return $item['description'] !== $descriptionToDelete;
-    });
-  
-    $jsonData = json_encode(array_values($filteredData));
-  
-    file_put_contents($jsonFile, $jsonData);
-  
-    echo 'La description a été supprimée avec succès.';
 }
 
 ?>
@@ -134,28 +133,23 @@ if (isset($_GET['delete_description'])) {
         <h1>Dépôt d'images</h1>
         <form method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="images">Sélectionnez les images :</label>
-                <input type="file" name="images[]" id="images" multiple accept="image/jpeg, image/png">
+                <label for="images">Sélectionnez l'image que vous souhaitez au format PNG :</label>
+                <input type="file" name="images[]" id="images" multiple accept="image/jpeg, image/png" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Saissisez la desciption :</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Envoyer</button>
         </form>
-        <div class="container">
-            <h1>Formulaire de description du partenaire</h1>
-            <form action="Gestion_Partenaire.php" method="POST">
-            <div class="form-group">
-                <label for="description">Description :</label>
-                <textarea class="form-control" id="description" name="description" rows="4"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-            </form>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     </div>
-    
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 <?php
 pagefooter_Intranet();
 ?>

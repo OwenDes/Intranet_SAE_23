@@ -50,9 +50,6 @@ function navbar_Intranet(){
                         <li class="nav-item border">
                             <a class="nav-link text-dark" href="#">Paramètres</a>
                         </li>
-                        <li class="nav-item border">
-                            <a class="nav-link text-dark" href="Gestion_Partenaire.php">Gestion des partenaires</a>
-                        </li>
                     </ul>
                 </div>
                 <div>
@@ -93,7 +90,7 @@ function pagefooter_Intranet() {
         </footer>
   </body>
 </html>';
-
+}
 function connexion($usr, $mdp){
     $users = getUsers();
 
@@ -113,9 +110,8 @@ function deconnexion(){
     session_destroy();
 }
 
-}
 function getUsers(){
-    $users = file_get_contents('donnees/users.json');
+    $users = file_get_contents('../données/users2.json');
     return json_decode($users, true);
 }
 
@@ -128,7 +124,7 @@ function addUser($usr, $mdp, $role = "user"){
         'role' => $role
     );
 
-    file_put_contents('data/users.json', json_encode($users));
+    file_put_contents('../données/users2.json', json_encode($users));
 }
 
 function deleteUser($usr){
@@ -136,7 +132,7 @@ function deleteUser($usr){
 
     if (isset($users[$usr])) {
         unset($users[$usr]);
-        file_put_contents('data/users.json', json_encode($users));
+        file_put_contents('../données/users2.json', json_encode($users));
         return true;
     } else {
         return false;

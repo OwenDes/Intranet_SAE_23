@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <head>
   <?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet() ?>
-  <title>Annuaire</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</head>
-<body>
   <div class="container">
     <h1>Annuaire</h1>
 
@@ -16,7 +9,7 @@
         <label for="search">Rechercher par numéro de téléphone, nom ou adresse e-mail :</label>
         <input type="text" class="form-control" id="search" name="search">
       </div>
-      <button type="submit" class="btn btn-primary">Rechercher</button>
+      <button type="submit" class="btn btn-primary my-2">Rechercher</button>
     </form>
 
     <?php
