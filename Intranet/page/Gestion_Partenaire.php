@@ -96,11 +96,14 @@ if (!empty($uploadedImages)) {
     echo '<h2>Images stockées :</h2>';
     echo '<div class="container">';
     echo '<div class="row">';
+    $displayCounter = 1; // Compteur pour les images affichées
     foreach ($uploadedImages as $image) {
         echo '<div class="col-md-3">';
         echo '<img src="' . $uploadDir . $image . '" alt="' . $image . '" class="img-thumbnail">';
         echo '<a href="?delete=' . $image . '" class="btn btn-danger btn-sm mt-2">Supprimer</a>';
         echo '</div>';
+
+        $displayCounter++; // Incrémenter le compteur d'images affichées
     }
     echo '</div>';
     echo '</div>';
