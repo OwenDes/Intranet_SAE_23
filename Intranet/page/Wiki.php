@@ -50,5 +50,7 @@
 </p>
     </div>
 </div>
-
+</div>
 </body>
+
+<?php pagefooter_Intranet()?>
