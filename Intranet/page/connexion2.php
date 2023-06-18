@@ -1,17 +1,18 @@
 <?php
 session_start();
 
-require_once('../Fonction_Intranet.php');
+include '../Fonction_Intranet.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     if (connexion($username, $password)) {
-        header('Location: ../traitement/gestions_utilisateurs.php');
+        header('Location: ../page/Intranet.php');
         exit;
     } else {
         $error = 'Identifiants incorrects, veuillez réessayer.';
+        // header('Location: ../page/connexion2.php');
     }
 }
 
