@@ -38,16 +38,12 @@ if (isset($_POST['submit'])) {
 
         $data = array(
             'description' => $description,
+            'image' => '../../Intranet/images/Upload/' . sprintf('%02d', $counter - 1) . '.png' // Ajouter le lien de l'image
         );
 
         $jsonFile = '../données/Partenaires.json';
 
-        $currentData = file_get_contents($jsonFile);
-        $currentData = json_decode($currentData, true);
-
-        $currentData[] = $data;
-
-        $jsonData = json_encode($currentData);
+        $jsonData = json_encode(array($data)); // Encapsuler la donnée dans un tableau
 
         file_put_contents($jsonFile, $jsonData);
 
@@ -121,34 +117,6 @@ if (!empty($partnerData)) {
     }
     echo '</div>';
     echo '</div>';
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $description = $_POST['description'];
-
-    if (!empty($description)) {
-        $data = array(
-            'description' => $description,
-            'image' => '../../images/' . sprintf('%02d', $counter) . '.png' // Ajouter le lien de l'image
-        );
-
-        $jsonFile = '../données/Partenaires.json';
-
-        $currentData = file_get_contents($jsonFile);
-        $currentData = json_decode($currentData, true);
-
-        $currentData[] = $data;
-
-        $jsonData = json_encode($currentData);
-
-        file_put_contents($jsonFile, $jsonData);
-
-        echo 'Description enregistrée avec succès !';
-
-        $counter++; // Incrémenter le compteur pour la prochaine image
-    } else {
-        echo 'Veuillez saisir une description avant de l\'enregistrer.';
-    }
 }
 
 ?>
