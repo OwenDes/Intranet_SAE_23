@@ -31,7 +31,7 @@
                 isset($contact[$critere]) && // Vérifier si le critère existe dans le contact
                 stripos($contact[$critere], $valeur) !== false // Effectuer une recherche insensible à la casse
             ) {
-                $resultats[] = $user;
+                $resultats[] = $contact;
             }
         }
 

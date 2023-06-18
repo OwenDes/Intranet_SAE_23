@@ -10,8 +10,8 @@
 
     <?php
       // Lire le contenu du fichier JSON
-      $json_data = file_get_contents('../données/contacts.json');
-      $contacts = json_decode($json_data, true)['contacts'];
+      $json_data = file_get_contents('../données/users.json');
+      $contacts = json_decode($json_data, true);
 
       // Vérifier si l'ID de l'utilisateur est présent dans les paramètres de requête
       if (isset($_GET['id'])) {
@@ -26,7 +26,7 @@
             // Mettre à jour les informations de l'utilisateur
             $user['nom'] = $_POST['nom'];
             $user['prenom'] = $_POST['prenom'];
-            $user['numero'] = $_POST['numero'];
+            $user['numero'] = $_POST['numero_telephone'];
             $user['mail'] = $_POST['mail'];
             $user['service'] = $_POST['service'];
             $user['fonction'] = $_POST['fonction'];
@@ -83,7 +83,7 @@
             </div>
             <div class="form-group">
               <label for="numero">Numéro de Téléphone:</label>
-              <input type="text" class="form-control" id="numero" name="numero" value="' . $user['numero'] . '" required>
+              <input type="text" class="form-control" id="numero" name="numero" value="' . $user['numero_telephone'] . '" required>
             </div>
             <div class="form-group">
               <label for="mail">Adresse mail:</label>
