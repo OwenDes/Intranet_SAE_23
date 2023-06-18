@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $users = getUsers();
         $users[$user]['mdp'] = $password;
         $users[$user]['role'] = $role;
-        file_put_contents('données/users2.json', json_encode($users));
+        file_put_contents('../données/users2.json', json_encode($users));
     } else if ($action == 'delete') {
         $user = $_POST['user'];
         deleteUser($user);
