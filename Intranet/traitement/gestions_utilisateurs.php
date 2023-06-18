@@ -111,7 +111,7 @@ if (isset($_GET['search'])) {
         </table>
     </div>
 
-    <?php pagefooter(); ?>
+    <?php pagefooter_Intranet(); ?>
     <script>
         var confirmation = function() {
             return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');
