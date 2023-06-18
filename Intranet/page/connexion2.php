@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     if (connexion($username, $password)) {
-        header('Location: ../traitement/gestions_utilisateurs.php');
+        header('Location: ../page/Intranet.php');
         exit;
     } else {
         $error = 'Identifiants incorrects, veuillez réessayer.';
