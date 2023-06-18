@@ -67,7 +67,7 @@ if (!empty($partnerData)) {
     echo '<div class="row">';
     foreach ($partnerData as $partner) {
         echo '<div class="col-md-6">';
-        echo '<img src="' . $partner['image'] . '" alt="' . $partner['description'] . '" class="img-thumbnail" style="width: 220px;">';
+        echo '<img src="' . $partner['image'] . '" alt="' . $partner['description'] . '" class="img-thumbnail" style="width: 250px;">';
         echo '</div>';
     }
     echo '</div>';

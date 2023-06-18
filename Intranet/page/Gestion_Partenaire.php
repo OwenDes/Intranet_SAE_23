@@ -12,19 +12,33 @@ if (isset($_POST['submit'])) {
     $fileNames = array_filter($_FILES['images']['name']);
 
     if (!empty($fileNames) && !empty($_POST['description'])) {
+        $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true); // Charger le contenu du fichier JSON existant
+
+        $description = $_POST['description'];
+        $counter = count($partnerData) + 1; // Obtenir le nombre actuel de partenaires pour la numérotation continue
+
         foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
             $fileName = $_FILES['images']['name'][$key];
             $fileTmp = $_FILES['images']['tmp_name'][$key];
             $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
             if (in_array($fileExt, $allowedExtensions)) {
-                $newFileName = uniqid('image_') . '.' . $fileExt;
-                $newFileName = sprintf('%02d', $counter) . '.' . $fileExt; // Utilisation de sprintf pour formater le compteur à deux chiffres
+                $newFileName = sprintf('%02d', $counter) . '.png'; // Utilisation de sprintf pour formater le compteur à deux chiffres
                 $destination = $uploadDir . $newFileName;
 
                 if (move_uploaded_file($fileTmp, $destination)) {
                     // Le fichier a été téléchargé avec succès, vous pouvez effectuer d'autres opérations ici si nécessaire
                     echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
+
+                    $data = array(
+                        'description' => $description,
+                        'image' => '../../Intranet/images/Upload/' . $newFileName // Ajouter le lien de l'image
+                    );
+
+                    $partnerData[] = $data; // Ajouter la nouvelle ligne de données
+
+                    echo 'Description enregistrée avec succès !<br>';
+
                     $counter++;
                 } else {
                     echo 'Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.<br>';
@@ -34,20 +48,9 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        $description = $_POST['description'];
+        $jsonData = json_encode($partnerData); // Convertir le tableau en JSON
 
-        $data = array(
-            'description' => $description,
-            'image' => '../../Intranet/images/Upload/' . sprintf('%02d', $counter - 1) . '.png' // Ajouter le lien de l'image
-        );
-
-        $jsonFile = '../données/Partenaires.json';
-
-        $jsonData = json_encode(array($data)); // Encapsuler la donnée dans un tableau
-
-        file_put_contents($jsonFile, $jsonData);
-
-        echo 'Description enregistrée avec succès !';
+        file_put_contents('../données/Partenaires.json', $jsonData); // Écrire les données dans le fichier JSON
     } else {
         echo 'Veuillez sélectionner au moins une image à télécharger et saisir une description avant de l\'enregistrer.';
     }
@@ -130,14 +133,14 @@ if (!empty($partnerData)) {
 </head>
 <body>
     <div class="container">
-        <h1>Dépôt d'images</h1>
+        <h1 >Dépôt de votre image :</h1>
         <form method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="images">Sélectionnez l'image que vous souhaitez au format PNG :</label>
+                <label for="images" class="lead"><br>Sélectionnez l'image que vous souhaitez au format PNG :</label><br>
                 <input type="file" name="images[]" id="images" multiple accept="image/jpeg, image/png" required>
             </div>
             <div class="form-group">
-                <label for="description">Saissisez la desciption :</label>
+                <label for="description" class="lead">Saissisez la desciption :</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Envoyer</button>
@@ -150,6 +153,4 @@ if (!empty($partnerData)) {
 </body>
 </html>
 
-<?php
-pagefooter_Intranet();
-?>
+<?php pagefooter_Intranet(); ?>
