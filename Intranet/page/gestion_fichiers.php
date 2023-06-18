@@ -30,18 +30,14 @@
             echo '</thead>';
             echo '<tbody>';
 
-            // Fonction de lecture de la base de données des fichiers
+    
             function lireBaseDeDonneesFichiers($dossier)
             {
-                // Ici, vous pouvez mettre votre code pour lire la base de données des fichiers pour le dossier spécifié
-                // Assurez-vous de récupérer les informations nécessaires, telles que le nom du fichier et le chemin d'accès
-                // Vous pouvez utiliser la variable $dossier pour filtrer les fichiers en fonction du dossier sélectionné
 
-                // Exemple de données fictives pour le dossier "Personnel"
                 $fichiers = array(
                     array('dossier' => 'Personnel', 'nom' => 'fichier1.txt', 'chemin' => '..\data\uploads\admin\648f540029371_photo-1503023345310-bd7c1de61c7d.jpg'),
                     array('dossier' => 'Personnel', 'nom' => 'fichier2.txt', 'chemin' => 'chemin/vers/fichier2.txt'),
-                    // Ajoutez d'autres fichiers si nécessaire
+    
                 );
 
                 return $fichiers;
@@ -60,19 +56,16 @@
                 }
             }
 
-            // Vérifier si un dossier est sélectionné
             if (isset($_GET['dossier'])) {
                 $dossierSelectionne = $_GET['dossier'];
 
-                // Vérifier si le dossier sélectionné est "Personnel"
+        
                 if ($dossierSelectionne === 'Personnel') {
                     afficherContenuDossier($depotDirperso);
                 } else {
-                    // Afficher une erreur ou une autre action en cas de dossier invalide
                     echo '<tr><td colspan="3">Dossier invalide</td></tr>';
                 }
             } else {
-                // Afficher le contenu du dossier "Personnel" par défaut
                 afficherContenuDossier($depotDirperso);
             }
 
@@ -140,7 +133,7 @@
 </div>
 <script>
     $(document).ready(function() {
-        // Fonction pour charger le contenu de la page externe de visualisation en AJAX
+
         function loadExternalContent(url) {
             $.ajax({
                 url: url,
@@ -155,11 +148,9 @@
             });
         }
 
-        // Événement d'ouverture du modal
+        
         $(document).on('click', '[data-bs-toggle="modal"][data-url]', function() {
-            var url = $(this).data('url'); // URL de la page externe à charger
-
-            // Charger le contenu de la page externe dans le modal
+            var url = $(this).data('url'); 
             loadExternalContent(url);
         });
     });
