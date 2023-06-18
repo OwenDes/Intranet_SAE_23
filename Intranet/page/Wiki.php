@@ -26,5 +26,29 @@
     </div>
 </div>
 </div>
+<div class="container border text-center shadow-lg bg white mt-5">
+<div class='row'>
+    <h2 class='mb-6'>Fonction Annuaire</h2>
+<div class="col border">
+<h3>Annuaire</h3>
+<p>Vous pouvez retrouver la page annuaire dans l'intranet du SNIS du Listenbourg. Elle va permettre de retrouver des informations sur les employé. 
+    Comme par exemple le Nom, Prénom, numéro de téléphone, Adresse mail, le service et la fonction. En un click sur l'image un modale apparait et 
+    apporte des informations complémentaire. L'Annuaire utilise une fonction php qui va permettre de lire le fichier contact.json et l'afficher sous la forme 
+    d'un tableau.
+</p>
+    </div>
+</div>
+</div>
+
+<div class="container border text-center shadow-lg bg white mt-5">
+<div class='row'>
+    <h2 class='mb-6'>Partage de fichier</h2>
+<div class="col border">
+<p>Concernant la gestion des fichiers, possibilité de choisir le groupe de partage lors du dépot de fichier , uniquement ce groupe
+     pourra lire et modifier le fichier, selon les droits cochés attention, il pourra être supprimé par l'admin mais il n’aura pas les 
+     droits de lecture et de modification. Possibilité d'importer uniquement des fichiers PDF, word, exel, vidéo d'un poids de 5Mo.
+</p>
+    </div>
+</div>
 
 </body>
