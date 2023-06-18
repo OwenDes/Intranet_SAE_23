@@ -3,7 +3,7 @@
         "matricule": "000",
         "photo": "../images/PhotosAnnuaire/000.jpg",
         "nom": "Admin",
-        "prenom": "Pompier",
+        "prenom": "Admin",
         "numero_telephone": "123456789",
         "mail": "admin.pompier@snis.lis",
         "service": "Service Administratif",
