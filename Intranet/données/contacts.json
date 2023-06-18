@@ -52,8 +52,8 @@
         },
         {
             "matricule": "0006",
-            "photo": "..\/donn\u00e9es\/PHOTOS\/0006.jpg",
-            "nom": "Taylor",
+            "photo": "..\/images\/PhotosAnnuaire\/0006.jpg",
+            "nom": "Test",
             "prenom": "Emily",
             "numero": "2345",
             "mail": "emily.taylor@snis.lis",
