@@ -94,4 +94,67 @@ function pagefooter_Intranet() {
   </body>
 </html>';
 }
+function getUsers(){
+    $users = file_get_contents('donnees/users.json');
+    return json_decode($users, true);
+}
+
+function addUser($usr, $mdp, $role = "user"){
+    $users = getUsers();
+
+    $users[$usr] = array(
+        'user' => $usr,
+        'mdp' => password_hash($mdp, PASSWORD_DEFAULT),
+        'role' => $role
+    );
+
+    file_put_contents('data/users.json', json_encode($users));
+}
+
+function deleteUser($usr){
+    $users = getUsers();
+
+    if (isset($users[$usr])) {
+        unset($users[$usr]);
+        file_put_contents('data/users.json', json_encode($users));
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function deconnexion(){
+    session_unset();
+    session_destroy();
+}
+
+function connexion($usr, $mdp){
+    $users = getUsers();
+
+    if (isset($users[$usr])) {
+        if (password_verify($mdp, $users[$usr]['mdp'])) {
+            $_SESSION['user'] = $users[$usr]['user'];
+            $_SESSION['role'] = $users[$usr]['role'];
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+
+function findUsers($texte){
+    $users = getUsers();
+    $resultats = array();
+
+    foreach ($users as $user) {
+        if (stripos($user['user'], $texte) !== false) {
+            $resultats[] = $user;
+        }
+    }
+
+    return $resultats;
+}
+
 ?>
