@@ -41,12 +41,11 @@ if (isset($_GET['search'])) {
 <html lang="fr">
 
 <head>
-    <?php setup(); ?>
+    <?php header_Intranet(); ?>
 </head>
 
 <body>
-    <?php pageheader(); ?>
-    <?php pagenavbar('page06'); ?>
+    <?php navbar_Intranet(); ?>
 
     <div class="container">
         <h1>Gestion des utilisateurs</h1>

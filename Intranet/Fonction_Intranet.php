@@ -128,7 +128,7 @@ function deconnexion(){
     session_destroy();
 }
 
-function connexion($usr, $mdp){
+/* function connexion($usr, $mdp){
     $users = getUsers();
 
     if (isset($users[$usr])) {
@@ -140,7 +140,7 @@ function connexion($usr, $mdp){
     }
 
     return false;
-}
+} */
 
 
 
