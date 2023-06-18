@@ -3,17 +3,10 @@ session_start();
 
 require_once('../Fonction_Intranet.php');
 
-<<<<<<< HEAD
 // if (!isset($_SESSION['user']) || $_SESSION['role'] != 'admin') {
 //     header('Location: ../page/connexion.php');
 //     exit();
 // }
-=======
-if (!isset($_SESSION['user']) || $_SESSION['role'] != 'admin') {
-    header('Location: ../page/connexion.php');
-    exit();
-}
->>>>>>> b4ddf8147a88e4b262c4ec242e52caebc5d37e4d
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = $_POST['action'];
