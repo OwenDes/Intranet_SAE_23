@@ -1,45 +1,25 @@
+<!DOCTYPE html>
+<head>
+  <?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet() ?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
             <h1>Gestionnaire de fichiers</h1>
         </div>
     </div>
-    <!--<div class="row"> Formulaire de dépôt de fichier basique
-        <div class="col-sm-12">
-            <h2>Déposer un fichier</h2>
-            <form action="../functions/traitement_function/upload.php" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="depot">Dépôt :</label>
-                    <select class="form-control" id="depot" name="depot">
-                        <option value="perso">Perso</option>
-                        < ?php
-                        foreach($_SESSION["roles"] as $role) {
-                            echo "<option value=\"$role\">$role</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="file">Sélectionner un fichier :</label>
-                    <input type="file" class="form-control-file" id="file" name="file">
-                </div>
-                <button type="submit" class="btn btn-primary">Télécharger</button>
-            </form>
-        </div>
-    </div>-->
-
     <div class="row">
         <div class="col-sm-12">
             <?php
-            $depotDir = "../data/uploads/";
-            #$perso = $_SESSION["username"];
-            #$depotDirperso = $depotDir . $perso . "/";
-            #$roles = $_SESSION["roles"];
+            $depotDir = "../données/fichier_partages/";
+            $perso = $_SESSION["username"];
+            $depotDirperso = $depotDir . $perso . "/";
+            $roles = $_SESSION["roles"];
 
             function afficherActions($fichier) {
                 echo '<td>';
-                echo '<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#externalModal" data-url="../functions/traitement_function/visualiser.php?fichier=' . urlencode($fichier) . '">Visualiser</button>';
-                echo '<a href="../functions/traitement_function/supprimer.php?fichier=' . urlencode($fichier) . '" class="btn btn-primary btn-danger btn-sm">Supprimer</a>';
+                echo '<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#externalModal" data-url="../traitement/visualiser.php?fichier=' . urlencode($fichier) . '">Visualiser</button>';
+                echo '<a href="../traitement/supprimer.php?fichier=' . urlencode($fichier) . '" class="btn btn-primary btn-danger btn-sm">Supprimer</a>';
                 echo '</td>';
             }
 
@@ -49,34 +29,34 @@
             echo '</thead>';
             echo '<tbody>';
 
-          # <!-- foreach ($roles as $role) {
-              #  $depotDirRole = $depotDir . $role . "/";
-              #  if (is_dir($depotDirRole)) {
-              #      $fichiersRole = scandir($depotDirRole);
-           #         foreach ($fichiersRole as $fichier) {
-                 #       if ($fichier !== '.' && $fichier !== '..') {
-              #              echo '<tr>';
-             #               echo '<td>' . $role . '</td>';
-             #               echo '<td>' . $fichier . '</td>';
-            # #               afficherActions($fichier);
-            #                echo '</tr>';
-            #            }
-             #       }
-             #   }
-            #} 
+            foreach ($roles as $role) {
+                $depotDirRole = $depotDir . $role . "/";
+                if (is_dir($depotDirRole)) {
+                    $fichiersRole = scandir($depotDirRole);
+                    foreach ($fichiersRole as $fichier) {
+                        if ($fichier !== '.' && $fichier !== '..') {
+                            echo '<tr>';
+                            echo '<td>' . $role . '</td>';
+                            echo '<td>' . $fichier . '</td>';
+                            afficherActions($fichier);
+                            echo '</tr>';
+                        }
+                    }
+                }
+            }
 
-            #if (is_dir($depotDirperso)) {
-            #    $fichiersPerso = scandir($depotDirperso);
-            #    foreach ($fichiersPerso as $fichier) {
-            #        if ($fichier !== '.' && $fichier !== '..') {
-            #endregion            echo '<tr>';
-             #           echo '<td>Personnel</td>';
-             #           echo '<td>' . $fichier . '</td>';
-             #           afficherActions($fichier);
-              #          echo '</tr>';
-             #       }
-              #  }
-          #  }
+            if (is_dir($depotDirperso)) {
+                $fichiersPerso = scandir($depotDirperso);
+                foreach ($fichiersPerso as $fichier) {
+                    if ($fichier !== '.' && $fichier !== '..') {
+                        echo '<tr>';
+                        echo '<td>Personnel</td>';
+                        echo '<td>' . $fichier . '</td>';
+                        afficherActions($fichier);
+                        echo '</tr>';
+                    }
+                }
+            }
 
             echo '<tr><td colspan="3"><button type="button" class="btn btn-primary" id="ajouterBtn">Ajouter un fichier</button></td></tr>';
 
@@ -94,7 +74,7 @@
                 <h5 class="modal-title" id="ajouterModalLabel">Ajouter un fichier</h5>
             </div>
             <div class="modal-body">
-                <form action="../functions/traitement_function/upload.php" method="post" enctype="multipart/form-data">
+                <form action="../traitement/upload.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="depot">Dépôt :</label>
                         <select class="form-control" id="depot" name="depot">
@@ -130,10 +110,9 @@
 <div class="modal fade" id="externalModal" tabindex="-1" aria-labelledby="externalModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-fullscreen">
         <div class="modal-content">
-            
-        <div class="modal-header">
-        <?php #    <h5 class="modal-title" id="externalModalLabel">Visualisation du fichier : <?php echo "$fichier"; ?></h5>
-         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="externalModalLabel">Visualisation du fichier : <?php echo "$fichier"; ?></h5>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
             </div>
             <div class="modal-body">
                 <div id="externalContent"></div>
@@ -141,22 +120,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    .responsive-embed-container {
-        position: relative;
-        overflow-x: hidden;
-        padding-bottom: 56.25%;
-    }
-    .responsive-embed-container embed {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 75%;
-    }
-</style>
-
 <script>
     $(document).ready(function() {
         // Fonction pour charger le contenu de la page externe de visualisation en AJAX
@@ -182,3 +145,7 @@
             loadExternalContent(url);
         });
     });
+</script>
+
+</body>
+</html>
