@@ -115,7 +115,7 @@ function deconnexion(){
 
 }
 function getUsers(){
-    $users = file_get_contents('données/users2.json');
+    $users = file_get_contents('../données/users2.json');
     return json_decode($users, true);
 }
 
@@ -128,7 +128,7 @@ function addUser($usr, $mdp, $role = "user"){
         'role' => $role
     );
 
-    file_put_contents('données/users2.json', json_encode($users));
+    file_put_contents('../données/users2.json', json_encode($users));
 }
 
 function deleteUser($usr){
@@ -136,7 +136,7 @@ function deleteUser($usr){
 
     if (isset($users[$usr])) {
         unset($users[$usr]);
-        file_put_contents('données/users2.json', json_encode($users));
+        file_put_contents('../données/users2.json', json_encode($users));
         return true;
     } else {
         return false;
