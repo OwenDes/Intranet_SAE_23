@@ -34,7 +34,7 @@
       <tbody>
         <?php
           // Lire le contenu du fichier JSON
-          $json_data = file_get_contents('../données/contacts.json');
+          $json_data = file_get_contents('../données/users.json');
           $contacts = json_decode($json_data, true)['contacts'];
 
           // Fonction de recherche
@@ -45,7 +45,6 @@
                      (strpos(strtolower($contact['nom']), strtolower($search)) !== false) ||
                      (strpos(strtolower($contact['mail']), strtolower($search)) !== false);
             });
-
             if (count($filteredContacts) > 0) {
               $contacts = $filteredContacts;
             } else {

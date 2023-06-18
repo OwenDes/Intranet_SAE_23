@@ -31,7 +31,7 @@
                 isset($contact[$critere]) && // Vérifier si le critère existe dans le contact
                 stripos($contact[$critere], $valeur) !== false // Effectuer une recherche insensible à la casse
             ) {
-                $resultats[] = $contact;
+                $resultats[] = $user;
             }
         }
 
@@ -39,16 +39,15 @@
     }
 
     // Lire le contenu du fichier JSON
-    $json_data = file_get_contents('../données/contacts.json');
-    $contacts = json_decode($json_data, true)['contacts'];
+    $json_data = file_get_contents('../données/users.json');
+    $contacts = json_decode($json_data, true);
 
     // Vérifier si une recherche a été effectuée
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
-
         // Exécuter la recherche par numéro de téléphone, nom ou adresse e-mail
         $resultats = array_merge(
-            rechercherContact($contacts, 'numero', $search),
+            rechercherContact($contacts, 'numero_telephone', $search),
             rechercherContact($contacts, 'nom', $search),
             rechercherContact($contacts, 'mail', $search)
         );
@@ -76,7 +75,7 @@
                 echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
                 echo '<td>' . $contact['nom'] . '</td>';
                 echo '<td>' . $contact['prenom'] . '</td>';
-                echo '<td>' . $contact['numero'] . '</td>';
+                echo '<td>' . $contact['numero_telephone'] . '</td>';
                 echo '<td>' . $contact['mail'] . '</td>';
                 echo '<td>' . $contact['service'] . '</td>';
                 echo '<td>' . $contact['fonction'] . '</td>';
@@ -96,7 +95,7 @@
                 echo '<img src="' . $contact['photo'] . '" width="100">';
                 echo '<p>Service: ' . $contact['service'] . '</p>';
                 echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-                echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
                 echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
                 echo '</div>';
                 echo '</div>';
@@ -133,7 +132,7 @@
                 echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
                 echo '<td>' . $contact['nom'] . '</td>';
                 echo '<td>' . $contact['prenom'] . '</td>';
-                echo '<td>' . $contact['numero'] . '</td>';
+                echo '<td>' . $contact['numero_telephone'] . '</td>';
                 echo '<td>' . $contact['mail'] . '</td>';
                 echo '<td>' . $contact['service'] . '</td>';
                 echo '<td>' . $contact['fonction'] . '</td>';
@@ -153,7 +152,7 @@
                 echo '<img src="' . $contact['photo'] . '" width="100">';
                 echo '<p>Service: ' . $contact['service'] . '</p>';
                 echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-                echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
                 echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
             }
 
