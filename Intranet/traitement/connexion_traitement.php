@@ -3,7 +3,7 @@
 $user = $_POST['login'];
 $mdp = $_POST['motdepasse'];
 
-$json = file_get_contents('../données/contacts.json');
+$json = file_get_contents('../données/users.json');
 $data = json_decode($json, true);
 
 foreach ($data as $key => $value) {
