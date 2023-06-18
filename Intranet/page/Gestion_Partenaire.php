@@ -3,7 +3,7 @@ include '../Fonction_Intranet.php';
 header_Intranet();
 navbar_Intranet();
 
-$uploadDir = 'C:/Users/Alex/Desktop/SAE 23 SNIS/Intranet_SAE_23/Intranet/images/Upload/'; // Répertoire de destination des images
+$uploadDir = '../../Intranet/images/Upload/'; // Répertoire de destination des images
 $counter = 1; // Compteur pour les noms de fichier
 
 if (isset($_POST['submit'])) {
@@ -122,6 +122,35 @@ if (!empty($partnerData)) {
     echo '</div>';
     echo '</div>';
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $description = $_POST['description'];
+
+    if (!empty($description)) {
+        $data = array(
+            'description' => $description,
+            'image' => '../../images/' . sprintf('%02d', $counter) . '.png' // Ajouter le lien de l'image
+        );
+
+        $jsonFile = '../données/Partenaires.json';
+
+        $currentData = file_get_contents($jsonFile);
+        $currentData = json_decode($currentData, true);
+
+        $currentData[] = $data;
+
+        $jsonData = json_encode($currentData);
+
+        file_put_contents($jsonFile, $jsonData);
+
+        echo 'Description enregistrée avec succès !';
+
+        $counter++; // Incrémenter le compteur pour la prochaine image
+    } else {
+        echo 'Veuillez saisir une description avant de l\'enregistrer.';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
