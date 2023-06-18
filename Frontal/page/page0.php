@@ -68,7 +68,6 @@ if ($actualites === null) {
         <div class='container d-flex align-items-center flex-column mb-2 col p-3 border border-dark actualite" . $i . "'>
             <h3>{$actualite['titre']}</h3>
             <p>{$actualite['contenu']}</p>
-            <a class='mt-auto p-2' href='{$actualite['lien']}'><button class='btn btn-light'>En savoir plus</button></a>
         </div>";
         $i = $i + 1;
     }
