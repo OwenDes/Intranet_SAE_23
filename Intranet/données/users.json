@@ -1,23 +1,89 @@
-{
-  "01":
-  {
-    "user":"admin",
-    "mdp":"bonjour",
-    "role":"admin",
-    "nom":"admin"
-  },
-  "02":
-  {
-    "user":"Uclaude",
-    "mdp":"bonjour",
-    "role":"user",
-    "nom":"Claude Ujique"
-  },
-  "03":
-  {
-    "user":"Tpierre",
-    "mdp":"bonjour",
-    "role":"user",
-    "nom":"Pierre Tokliviak"
-  }
-}
+[
+    {
+        "matricule": "000",
+        "photo": "../images/PhotosAnnuaire/000.jpg",
+        "nom": "Admin",
+        "prenom": "Pompier",
+        "numero_telephone": "123456789",
+        "mail": "admin.pompier@snis.lis",
+        "service": "Service Administratif",
+        "fonction": "Administrateur",
+        "motdepasse": "098f6bcd4621d373cade4e832627b4f6",
+        "role": "admin"
+    },
+    {
+        "matricule": "001",
+        "photo": "../images/PhotosAnnuaire/001.jpg",
+        "nom": "John",
+        "prenom": "Doe",
+        "numero_telephone": "234567890",
+        "mail": "john.doe@snis.lis",
+        "service": "Service Logistique",
+        "fonction": "Chef de Service",
+        "motdepasse": "5f4dcc3b5aa765d61d8327deb882cf99",
+        "role": "user"
+    },
+    {
+        "matricule": "000",
+        "photo": "../images/PhotosAnnuaire/000.jpg",
+        "nom": "Admin",
+        "prenom": "Pompier",
+        "numero_telephone": "123456789",
+        "mail": "admin.pompier@snis.lis",
+        "service": "Service Administratif",
+        "fonction": "Administrateur",
+        "motdepasse": "098f6bcd4621d373cade4e832627b4f6",
+        "role": "admin"
+    },
+    {
+        "matricule": "001",
+        "photo": "../images/PhotosAnnuaire/001.jpg",
+        "nom": "John",
+        "prenom": "Doe",
+        "numero_telephone": "234567890",
+        "mail": "john.doe@snis.lis",
+        "service": "Service Logistique",
+        "fonction": "Chef de Service",
+        "motdepasse": "5f4dcc3b5aa765d61d8327deb882cf99",
+        "role": "user"
+    },
+    {
+        "matricule": "002",
+        "photo": "../images/PhotosAnnuaire/002.jpg",
+        "nom": "Jane",
+        "prenom": "Doe",
+        "numero_telephone": "345678901",
+        "mail": "jane.doe@snis.lis",
+        "service": "Service Logistique",
+        "fonction": "Chef de Service",
+        "motdepasse": "5f4dcc3b5aa765d61d8327deb882cf99",
+        "role": "user"
+    },
+    {
+        "matricule": "003",
+        "photo": "../images/PhotosAnnuaire/003.jpg",
+        "nom": "Bob",
+        "prenom": "Smith",
+        "numero_telephone": "456789012",
+        "mail": "bob.smith@snis.lis",
+        "service": "Service Logistique",
+        "fonction": "Chef de Service",
+        "motdepasse": "5f4dcc3b5aa765d61d8327deb882cf99",
+        "role": "user"
+    },
+    {
+        "matricule": "004",
+        "photo": "../images/PhotosAnnuaire/004.jpg",
+        "nom": "Alice",
+        "prenom": "Johnson",
+        "numero_telephone": "567890123",
+        "mail": "alice.johnson@snis.lis",
+        "service": "Service Logistique",
+        "fonction": "Chef de Service",
+        "motdepasse": "5f4dcc3b5aa765d61d8327deb882cf99",
+        "role": "user"
+    }
+ 
+      
+  ]
+  
