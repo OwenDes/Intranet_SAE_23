@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <head>
   <?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet() ?>
-  <title>Annuaire</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</head>
-<body>
   <div class="container">
     <h1>Annuaire</h1>
 
@@ -16,7 +9,7 @@
         <label for="search">Rechercher par numéro de téléphone, nom ou adresse e-mail :</label>
         <input type="text" class="form-control" id="search" name="search">
       </div>
-      <button type="submit" class="btn btn-primary">Rechercher</button>
+      <button type="submit" class="btn btn-primary my-2">Rechercher</button>
     </form>
 
     <?php
@@ -39,18 +32,19 @@
     }
 
     // Lire le contenu du fichier JSON
-    $json_data = file_get_contents('../données/users.json');
+    $json_data = file_get_contents('../données/contacts.json');
     $contacts = json_decode($json_data, true);
 
     // Vérifier si une recherche a été effectuée
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
         // Exécuter la recherche par numéro de téléphone, nom ou adresse e-mail
-        $resultats = array_merge(
-            rechercherContact($contacts, 'numero_telephone', $search),
-            rechercherContact($contacts, 'nom', $search),
-            rechercherContact($contacts, 'mail', $search)
-        );
+        $resultats = rechercherContact($contacts, 'numero_telephone', $search);
+        $resultats = array_merge($resultats, rechercherContact($contacts, 'nom', $search));
+        $resultats = array_merge($resultats, rechercherContact($contacts, 'mail', $search));
+
+        // Supprimer les doublons des résultats
+        $resultats = array_unique($resultats, SORT_REGULAR);
 
         // Afficher les résultats de la recherche
         echo '<h2>Résultats de la recherche pour : ' . $search . '</h2>';
@@ -75,7 +69,7 @@
                 echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
                 echo '<td>' . $contact['nom'] . '</td>';
                 echo '<td>' . $contact['prenom'] . '</td>';
-                echo '<td>' . $contact['numero_telephone'] . '</td>';
+                echo '<td>' . $contact['numero'] . '</td>';
                 echo '<td>' . $contact['mail'] . '</td>';
                 echo '<td>' . $contact['service'] . '</td>';
                 echo '<td>' . $contact['fonction'] . '</td>';
@@ -95,7 +89,7 @@
                 echo '<img src="' . $contact['photo'] . '" width="100">';
                 echo '<p>Service: ' . $contact['service'] . '</p>';
                 echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-                echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
                 echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
                 echo '</div>';
                 echo '</div>';
@@ -154,17 +148,19 @@
                 echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
                 echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
                 echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
             }
 
             echo '</tbody>';
             echo '</table>';
         } else {
-            echo '<p>Aucun contact.</p>';
+            echo '<p>Aucun contact trouvé.</p>';
         }
     }
     ?>
-
   </div>
 </body>
-<?php pagefooter_Intranet() ;?>
 </html>

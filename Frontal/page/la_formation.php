@@ -44,11 +44,9 @@
         <h2>Les différents grades</h2>
         <p>Les sapeurs-pompiers du Service National d’Incendie et de Secours du Listenbourg sont organisés en différents grades, en fonction de leur expérience et de leurs compétences :</p>
         <ul>
-            <li>Sapeur-pompier volontaire</li>
-            <li>Sergent</li>
-            <li>Capitaine</li>
-            <li>Commandant</li>
-            <li>Colonel</li>
+            <li> Hommes du rang : sapeur 1ère classe, caporal, caporal-chef</li>
+            <li>Sous officiers : sergent, sergent-chef, adjudant, adjudant-chef</li>
+            <li>Officier : Lieutenant, capitaine, commandant, lieutenant-colonel, colonel</li>
         </ul>
         <p>Chaque grade a des responsabilités spécifiques, et les sapeurs-pompiers sont encouragés à progresser dans leur carrière en suivant des formations et en passant des examens pour obtenir des promotions.</p>
     </div>

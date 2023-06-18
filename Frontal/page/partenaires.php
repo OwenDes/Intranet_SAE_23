@@ -60,25 +60,39 @@
     <div class="container offset-md-2 pt-5 pb-4">
     
 <?php
-    // Lire le contenu du fichier JSON
+
+$partnerData = json_decode(file_get_contents('../../Intranet/données/Partenaires.json'), true);
+
+if (!empty($partnerData)) {
+    echo '<div class="row">';
+    foreach ($partnerData as $partner) {
+        echo '<div class="col-md-6">';
+        echo '<img src="' . $partner['image'] . '" alt="' . $partner['description'] . '" class="img-thumbnail" style="width: 220px;">';
+        echo '</div>';
+    }
+    echo '</div>';
+    echo '</div>';
+}
+?>
+    </div>
+    <div class="container-fluid offset-md-2 col-sm-7 lead">
+        <p>
+        <?php
+// Lire le contenu du fichier JSON
 $jsonData = file_get_contents('../../Intranet/données/partenaires.json');
 
 // Décoder le contenu JSON en tableau associatif
 $data = json_decode($jsonData, true);
 
-// Récupérer la valeur de la variable "description"
-$description = $data['description'];
+// Parcourir les éléments du tableau
+foreach ($data as $item) {
+    // Récupérer la valeur de la variable "description"
+    $description = $item['description'];
 
-// Utiliser la valeur de la variable "description" dans votre paragraphe
-$paragraphe = '<p>' . $description . '</p>';
+    echo $description;
 
-// Afficher le paragraphe
-echo $paragraphe;
+}
 ?>
-    </div>
-    <div class="container-fluid offset-md-2 col-sm-7 lead">
-        <p>
-            
         </p>
     </div>
 </section>
