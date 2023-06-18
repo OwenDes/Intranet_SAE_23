@@ -76,7 +76,7 @@
                             </a>
                         </div>
                         <div class="col-sm-3">
-                            <a href="#">
+                            <a href="gestion_fichiers.php">
                                 <img class="img-fluid rounded-circle" src="../images/Gestion_des_fichier.png" alt="Logo">
                             </a>
                         </div>
