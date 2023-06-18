@@ -126,7 +126,7 @@
                 echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
                 echo '<td>' . $contact['nom'] . '</td>';
                 echo '<td>' . $contact['prenom'] . '</td>';
-                echo '<td>' . $contact['numero_telephone'] . '</td>';
+                echo '<td>' . $contact['numero'] . '</td>';
                 echo '<td>' . $contact['mail'] . '</td>';
                 echo '<td>' . $contact['service'] . '</td>';
                 echo '<td>' . $contact['fonction'] . '</td>';
@@ -146,7 +146,7 @@
                 echo '<img src="' . $contact['photo'] . '" width="100">';
                 echo '<p>Service: ' . $contact['service'] . '</p>';
                 echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-                echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
                 echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
                 echo '</div>';
                 echo '</div>';
