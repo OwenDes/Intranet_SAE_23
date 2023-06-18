@@ -1,0 +1,4 @@
+{"admin":{"user":"admin","mdp":"$2y$10$CoalAxcI4w3C63G0AIrRx.B5hTtma6EDiLibZre5\/MSdilJZd2HNS","role":"admin"},
+"user":{"user":"user","mdp":"$2y$10$L0KPGMOacd6IJcdhm7RubO9kNcZdTXZrerF6llt8zzM1ax81C6aA.","role":"user"},
+"anonymous":{"user":"anonymous","mdp":"$2y$10$HuEJ1REGEVClepPNqin9mu0ZJzKBJKMFzR\/Xg.vpsBxOwO1IezZyS","role":"visitor"},
+"owen":{"user":"owen","mdp":"$2y$10$sCSCjRg77lFsRY6MF8fOQeVCXf5VkWEjSiGFFjYn\/h79063N3TkB6","role":"admin"}}

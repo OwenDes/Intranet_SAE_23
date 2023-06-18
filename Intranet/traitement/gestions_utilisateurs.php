@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-require_once('functions.php');
+require_once('Fonction_Intranet.php');
 
 if (!isset($_SESSION['user']) || $_SESSION['role'] != 'admin') {
-    header('Location: page09.php');
+    header('Location: ../page/connexion2.php');
     exit();
 }
 

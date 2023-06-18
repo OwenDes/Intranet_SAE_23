@@ -93,6 +93,26 @@ function pagefooter_Intranet() {
         </footer>
   </body>
 </html>';
+
+function connexion($usr, $mdp){
+    $users = getUsers();
+
+    if (isset($users[$usr])) {
+        if (password_verify($mdp, $users[$usr]['mdp'])) {
+            $_SESSION['user'] = $users[$usr]['user'];
+            $_SESSION['role'] = $users[$usr]['role'];
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function deconnexion(){
+    session_unset();
+    session_destroy();
+}
+
 }
 function getUsers(){
     $users = file_get_contents('donnees/users.json');
@@ -122,28 +142,6 @@ function deleteUser($usr){
         return false;
     }
 }
-
-function deconnexion(){
-    session_unset();
-    session_destroy();
-}
-
-/* function connexion($usr, $mdp){
-    $users = getUsers();
-
-    if (isset($users[$usr])) {
-        if (password_verify($mdp, $users[$usr]['mdp'])) {
-            $_SESSION['user'] = $users[$usr]['user'];
-            $_SESSION['role'] = $users[$usr]['role'];
-            return true;
-        }
-    }
-
-    return false;
-} */
-
-
-
 function findUsers($texte){
     $users = getUsers();
     $resultats = array();
