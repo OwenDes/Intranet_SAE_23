@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once('Fonction_Intranet.php');
+require_once('../Fonction_Intranet.php');
 
 if (!isset($_SESSION['user']) || $_SESSION['role'] != 'admin') {
     header('Location: ../page/connexion2.php');
