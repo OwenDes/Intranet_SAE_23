@@ -12,9 +12,7 @@
         <div class="col-sm-12">
             <?php
             $depotDir = "../données/fichier_partages/";
-            $perso = $_SESSION["username"];
-            $depotDirperso = $depotDir . $perso . "/";
-            $roles = $_SESSION["roles"];
+            $depotDirperso = "../données/fichier_partages/Personnel/";
 
             function afficherActions($fichier) {
                 echo '<td>';
@@ -28,22 +26,6 @@
             echo '<tr><th>Dossier</th><th>Nom du fichier</th><th>Actions</th></tr>';
             echo '</thead>';
             echo '<tbody>';
-
-            foreach ($roles as $role) {
-                $depotDirRole = $depotDir . $role . "/";
-                if (is_dir($depotDirRole)) {
-                    $fichiersRole = scandir($depotDirRole);
-                    foreach ($fichiersRole as $fichier) {
-                        if ($fichier !== '.' && $fichier !== '..') {
-                            echo '<tr>';
-                            echo '<td>' . $role . '</td>';
-                            echo '<td>' . $fichier . '</td>';
-                            afficherActions($fichier);
-                            echo '</tr>';
-                        }
-                    }
-                }
-            }
 
             if (is_dir($depotDirperso)) {
                 $fichiersPerso = scandir($depotDirperso);
