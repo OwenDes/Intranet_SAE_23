@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <?php include '../Fonction_Intranet.php'; header_Intranet(); ?>
+  <?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet() ?>
   <title>Annuaire</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -10,59 +10,161 @@
 <body>
   <div class="container">
     <h1>Annuaire</h1>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Photo</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Numéro de Téléphone</th>
-          <th>Adresse mail</th>
-          <th>Service</th>
-          <th>Fonction</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-          // Lire le contenu du fichier JSON
-          $json_data = file_get_contents('../données/contacts.json');
-          $contacts = json_decode($json_data, true)['contacts'];
 
-          // Afficher chaque contact dans une ligne du tableau
-          foreach ($contacts as $id => $contact) {
+    <form method="GET" action="#">
+      <div class="form-group">
+        <label for="search">Rechercher par numéro de téléphone, nom ou adresse e-mail :</label>
+        <input type="text" class="form-control" id="search" name="search">
+      </div>
+      <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form>
+
+    <?php
+    // Fonction de recherche dans l'annuaire
+    function rechercherContact($contacts, $critere, $valeur)
+    {
+        $resultats = array();
+
+        foreach ($contacts as $contact) {
+            // Vérifier si le critère de recherche correspond à la valeur
+            if (
+                isset($contact[$critere]) && // Vérifier si le critère existe dans le contact
+                stripos($contact[$critere], $valeur) !== false // Effectuer une recherche insensible à la casse
+            ) {
+                $resultats[] = $contact;
+            }
+        }
+
+        return $resultats;
+    }
+
+    // Lire le contenu du fichier JSON
+    $json_data = file_get_contents('../données/contacts.json');
+    $contacts = json_decode($json_data, true)['contacts'];
+
+    // Vérifier si une recherche a été effectuée
+    if (isset($_GET['search'])) {
+        $search = $_GET['search'];
+
+        // Exécuter la recherche par numéro de téléphone, nom ou adresse e-mail
+        $resultats = array_merge(
+            rechercherContact($contacts, 'numero', $search),
+            rechercherContact($contacts, 'nom', $search),
+            rechercherContact($contacts, 'mail', $search)
+        );
+
+        // Afficher les résultats de la recherche
+        echo '<h2>Résultats de la recherche pour : ' . $search . '</h2>';
+
+        if (count($resultats) > 0) {
+            echo '<table class="table table-striped">';
+            echo '<thead>';
             echo '<tr>';
-            echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
-            echo '<td>' . $contact['nom'] . '</td>';
-            echo '<td>' . $contact['prenom'] . '</td>';
-            echo '<td>' . $contact['numero'] . '</td>';
-            echo '<td>' . $contact['mail'] . '</td>';
-            echo '<td>' . $contact['service'] . '</td>';
-            echo '<td>' . $contact['fonction'] . '</td>';
+            echo '<th>Photo</th>';
+            echo '<th>Nom</th>';
+            echo '<th>Prénom</th>';
+            echo '<th>Numéro de Téléphone</th>';
+            echo '<th>Adresse mail</th>';
+            echo '<th>Service</th>';
+            echo '<th>Fonction</th>';
             echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
 
-            // Afficher le modal pour chaque contact
-            echo '<div class="modal fade" id="contactModal-' . $id . '" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel-' . $id . '" aria-hidden="true">';
-            echo '<div class="modal-dialog" role="document">';
-            echo '<div class="modal-content">';
-            echo '<div class="modal-header">';
-            echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['nom'] . ' ' . $contact['prenom'] . '</h5>';
-            echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-            echo '<span aria-hidden="true">&times;</span>';
-            echo '</button>';
-            echo '</div>';
-            echo '<div class="modal-body">';
-            echo '<img src="' . $contact['photo'] . '" width="100">';
-            echo '<p>Service: ' . $contact['service'] . '</p>';
-            echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-            echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
-            echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
-          }
-          if (count($contacts) == 0) {
-            echo '<tr><td colspan="5">Aucun contact</td></tr>';
-          }
-        ?>
-      </tbody>
-    </table>
+            foreach ($resultats as $id => $contact) {
+                echo '<tr>';
+                echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
+                echo '<td>' . $contact['nom'] . '</td>';
+                echo '<td>' . $contact['prenom'] . '</td>';
+                echo '<td>' . $contact['numero'] . '</td>';
+                echo '<td>' . $contact['mail'] . '</td>';
+                echo '<td>' . $contact['service'] . '</td>';
+                echo '<td>' . $contact['fonction'] . '</td>';
+                echo '</tr>';
+
+                // Afficher le modal pour chaque contact
+                echo '<div class="modal fade" id="contactModal-' . $id . '" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel-' . $id . '" aria-hidden="true">';
+                echo '<div class="modal-dialog" role="document">';
+                echo '<div class="modal-content">';
+                echo '<div class="modal-header">';
+                echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['nom'] . ' ' . $contact['prenom'] . '</h5>';
+                echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+                echo '<span aria-hidden="true">&times;</span>';
+                echo '</button>';
+                echo '</div>';
+                echo '<div class="modal-body">';
+                echo '<img src="' . $contact['photo'] . '" width="100">';
+                echo '<p>Service: ' . $contact['service'] . '</p>';
+                echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
+                echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+
+            echo '</tbody>';
+            echo '</table>';
+        } else {
+            echo '<p>Aucun résultat trouvé.</p>';
+        }
+    } else {
+        // Afficher la liste complète des contacts
+        echo '<h2>Liste complète des contacts</h2>';
+
+        if (count($contacts) > 0) {
+            echo '<table class="table table-striped">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Photo</th>';
+            echo '<th>Nom</th>';
+            echo '<th>Prénom</th>';
+            echo '<th>Numéro de Téléphone</th>';
+            echo '<th>Adresse mail</th>';
+            echo '<th>Service</th>';
+            echo '<th>Fonction</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
+            foreach ($contacts as $id => $contact) {
+                echo '<tr>';
+                echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
+                echo '<td>' . $contact['nom'] . '</td>';
+                echo '<td>' . $contact['prenom'] . '</td>';
+                echo '<td>' . $contact['numero'] . '</td>';
+                echo '<td>' . $contact['mail'] . '</td>';
+                echo '<td>' . $contact['service'] . '</td>';
+                echo '<td>' . $contact['fonction'] . '</td>';
+                echo '</tr>';
+
+                // Afficher le modal pour chaque contact
+                echo '<div class="modal fade" id="contactModal-' . $id . '" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel-' . $id . '" aria-hidden="true">';
+                echo '<div class="modal-dialog" role="document">';
+                echo '<div class="modal-content">';
+                echo '<div class="modal-header">';
+                echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['nom'] . ' ' . $contact['prenom'] . '</h5>';
+                echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+                echo '<span aria-hidden="true">&times;</span>';
+                echo '</button>';
+                echo '</div>';
+                echo '<div class="modal-body">';
+                echo '<img src="' . $contact['photo'] . '" width="100">';
+                echo '<p>Service: ' . $contact['service'] . '</p>';
+                echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
+                echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
+            }
+
+            echo '</tbody>';
+            echo '</table>';
+        } else {
+            echo '<p>Aucun contact.</p>';
+        }
+    }
+    ?>
+
   </div>
 </body>
 <?php pagefooter_Intranet() ;?>

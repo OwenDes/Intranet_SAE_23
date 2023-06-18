@@ -31,6 +31,33 @@
             $user['service'] = $_POST['service'];
             $user['fonction'] = $_POST['fonction'];
 
+            // Vérifier si un fichier a été téléchargé
+            if ($_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+              $uploadDir = '../images/PhotosAnnuaire/'; // Répertoire de stockage des photos
+              $matricule = $user['matricule'];
+              $extension = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+              $allowedExtensions = ['jpg', 'jpeg'];
+
+              // Vérifier l'extension du fichier
+              if (in_array($extension, $allowedExtensions)) {
+                $fileName = $matricule . '.' . $extension;
+                $targetPath = $uploadDir . $fileName;
+
+                // Supprimer l'ancienne photo si elle existe
+                if (file_exists($targetPath)) {
+                  unlink($targetPath);
+                }
+
+                // Déplacer le fichier téléchargé vers le répertoire de stockage
+                move_uploaded_file($_FILES['photo']['tmp_name'], $targetPath);
+
+                // Mettre à jour le nom de la photo dans les informations de l'utilisateur
+                $user['photo'] = $targetPath;
+              } else {
+                echo '<p>Erreur : seuls les fichiers .jpg sont autorisés.</p>';
+              }
+            }
+
             // Mettre à jour le contact dans la liste des contacts
             $contacts[$id] = $user;
 
@@ -45,7 +72,7 @@
 
           // Afficher le formulaire de modification pré-rempli avec les informations de l'utilisateur
           echo '
-          <form method="POST">
+          <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label for="nom">Nom:</label>
               <input type="text" class="form-control" id="nom" name="nom" value="' . $user['nom'] . '" required>
@@ -69,6 +96,10 @@
             <div class="form-group">
               <label for="fonction">Fonction:</label>
               <input type="text" class="form-control" id="fonction" name="fonction" value="' . $user['fonction'] . '" required>
+            </div>
+            <div class="form-group">
+              <label for="photo">Photo de profil (fichier .jpg):</label>
+              <input type="file" class="form-control-file" id="photo" name="photo" accept=".jpg">
             </div>
             <button type="submit" class="btn btn-primary">Modifier</button>
           </form>

@@ -32,7 +32,7 @@
         },
         {
             "matricule": "0004",
-            "photo": "..\/images\/PhtosAnnuaire\/0004.jpg",
+            "photo": "..\/images\/PhotosAnnuaire\/0004.jpg",
             "nom": "Johnson",
             "prenom": "Sarah",
             "numero": "3456",
@@ -42,7 +42,7 @@
         },
         {
             "matricule": "0005",
-            "photo": "..\/images\/PhtosAnnuaire\/0005.jpg",
+            "photo": "..\/images\/PhotosAnnuaire\/0005.jpg",
             "nom": "Brown",
             "prenom": "Michael",
             "numero": "7890",

@@ -10,6 +10,14 @@
 <body>
   <div class="container">
     <h1>Annuaire</h1>
+    <form method="GET" action="">
+      <div class="form-group">
+        <input type="text" class="form-control" name="search" placeholder="Recherche par numéro, nom ou adresse e-mail">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+      </div>
+    </form>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -28,6 +36,22 @@
           // Lire le contenu du fichier JSON
           $json_data = file_get_contents('../données/contacts.json');
           $contacts = json_decode($json_data, true)['contacts'];
+
+          // Fonction de recherche
+          if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search = $_GET['search'];
+            $filteredContacts = array_filter($contacts, function ($contact) use ($search) {
+              return (strpos($contact['numero'], $search) !== false) ||
+                     (strpos(strtolower($contact['nom']), strtolower($search)) !== false) ||
+                     (strpos(strtolower($contact['mail']), strtolower($search)) !== false);
+            });
+
+            if (count($filteredContacts) > 0) {
+              $contacts = $filteredContacts;
+            } else {
+              echo '<tr><td colspan="8">Aucun résultat trouvé.</td></tr>';
+            }
+          }
 
           // Afficher chaque contact dans une ligne du tableau
           foreach ($contacts as $id => $contact) {
@@ -60,7 +84,7 @@
             echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
           }
           if (count($contacts) == 0) {
-            echo '<tr><td colspan="6">Aucun contact</td></tr>';
+            echo '<tr><td colspan="8">Aucun contact</td></tr>';
           }
         ?>
       </tbody>
