@@ -42,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">            
                 <div class="form-group">
                     <label for="username" class="form-label">Utilisateur</label>
-                    <input type="text" class="form-control" id="login" name="login" placeholder="Utilisateur" required>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Utilisateur" required>
                 </div>
                     <div class="form-group">
                     <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" class="form-control" id="motdepasse" name="motdepasse" placeholder="Mot de passe" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
                 </div>
                 <button type="submit" class="btn mt-3 btn-primary">Se connecter</button>
             </form>
