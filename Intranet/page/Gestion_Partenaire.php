@@ -29,6 +29,7 @@ if (isset($_POST['submit'])) {
                     echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
                     $data = array(
                         'description' => nl2br($description),
+
                         'image' => '../../Intranet/images/Upload/' . $newFileName
                     );
 
@@ -73,11 +74,12 @@ if (isset($_GET['delete_description'])) {
     $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
     foreach ($partnerData as $key => $partner) {
-        if ($partner['description'] === $descriptionToDelete) {
+        if (strcmp($partner['description'], $descriptionToDelete) === 0) {
             unset($partnerData[$key]);
             break;
         }
     }
+    
 
     $jsonData = json_encode($partnerData);
     file_put_contents('../données/Partenaires.json', $jsonData);
