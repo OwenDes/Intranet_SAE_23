@@ -18,7 +18,7 @@
     <p><strong>Responsable éditorial</strong></p>
     <p>Le Contrôleur général Pierre Antonos - Directeur national</p>
 
-    <p><strong>Webmestre</strong></p>
+    <p><strong>Webmaster</strong></p>
     <ul>
         <li>Liam</li>
         <li>Owen</li>

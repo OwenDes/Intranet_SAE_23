@@ -31,17 +31,17 @@
                   <div class="col container">
 	                <span class="num" data-val="2000">000</span>
                     <br>
-                    <span class="text">sapeur pompier professionnels</span>
+                    <span class="text">sapeurs-pompiers professionnels</span>
                   </div>
                   <div class="col container">
                     <span class="num" data-val="420">000</span>
                     <br>
-                    <span class="text">jeunes sapeur pompier formés</span>
+                    <span class="text">jeunes sapeurs-pompiers formés</span>
                   </div>
                   <div class="col container">
                     <span class="num" data-val="320">000</span>
                     <br>
-                    <span class="text">chats recuperé dans des arbres</span>
+                    <span class="text">chats récupérés dans des arbres</span>
                   </div>
                   <script src="../js/num1.js"></script>
                 </div>
@@ -54,7 +54,7 @@
             </div>
           </div>
           <?php
-$donnees_json = file_get_contents("../données/actualites.json");
+$donnees_json = file_get_contents("../../Intranet/données/actualites.json");
 $actualites = json_decode($donnees_json, true);
 
 if ($actualites === null) {
@@ -68,7 +68,6 @@ if ($actualites === null) {
         <div class='container d-flex align-items-center flex-column mb-2 col p-3 border border-dark actualite" . $i . "'>
             <h3>{$actualite['titre']}</h3>
             <p>{$actualite['contenu']}</p>
-            <a class='mt-auto p-2' href='{$actualite['lien']}'><button class='btn btn-light'>En savoir plus</button></a>
         </div>";
         $i = $i + 1;
     }

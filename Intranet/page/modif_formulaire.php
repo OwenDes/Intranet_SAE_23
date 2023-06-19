@@ -1,4 +1,17 @@
-<?php include '../Fonction_Intranet.php'; header_Intranet() ; navbar_Intranet() ?>
+<?php include '../Fonction_Intranet.php'; 
+session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
+    header('Location: ../page/connexion.php');
+    exit();
+}
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header('Location: ../page/Intranet.php');
+    exit();
+}
+
+header_Intranet() ; navbar_Intranet() ?>
+
+
 
 <?php
 $donnees_json = file_get_contents("../données/actualites.json");
@@ -13,8 +26,7 @@ if ($actualites === null) {
     foreach ($actualites as $id => $actualite) {
         $tab .= "<div class='container mb-2 col p-3 border border-dark actualite" . $i . " '>
                     <h3 class='text-center'>{$actualite['titre']}</h3>
-                    <p>{$actualite['contenu']}</p>
-                    <a href='{$actualite['lien']}'><button class='btn btn-light'>En savoir plus</button></a> 
+                    <p>{$actualite['contenu']}</p> 
                 </div>";
         $i = $i + 1;
     }
@@ -30,22 +42,16 @@ if ($actualites === null) {
       <div class="row">
         <?php foreach ($actualites as $id => $actualite): ?>
           <input type="hidden" name="ids[]" value="<?= $id ?>">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="mb-3">
               <label for="titres[]" class="form-label">Titre :</label>
               <input type="text" name="titres[]" class="form-control" value="<?= $actualite['titre'] ?>">
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="mb-3">
               <label for="contenus[]" class="form-label">Contenu :</label>
               <textarea name="contenus[]" class="form-control"><?= $actualite['contenu'] ?></textarea>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="mb-3">
-              <label for="liens[]" class="form-label">Lien :</label>
-              <input type="text" name="liens[]" class="form-control" value="<?= $actualite['lien'] ?>">
             </div>
           </div>
           <hr>
