@@ -10,26 +10,22 @@
 
     <?php
       // Lire le contenu du fichier JSON
-      $json_data = file_get_contents('../données/users.json');
+      $json_data = file_get_contents('../données/users2.json');
       $contacts = json_decode($json_data, true);
 
       // Vérifier si l'ID de l'utilisateur est présent dans les paramètres de requête
       if (isset($_GET['id'])) {
         $id = $_GET['id'];
 
-        // Vérifier si l'utilisateur existe dans la liste des contacts
-        if (isset($contacts[$id])) {
-          $user = $contacts[$id];
-
           // Vérifier si le formulaire a été soumis
           if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Mettre à jour les informations de l'utilisateur
-            $user['nom'] = $_POST['nom'];
-            $user['prenom'] = $_POST['prenom'];
-            $user['numero'] = $_POST['numero_telephone'];
-            $user['mail'] = $_POST['mail'];
-            $user['service'] = $_POST['service'];
-            $user['fonction'] = $_POST['fonction'];
+            $contact['lastName'] = $_POST['lastName'];
+            $contact['user'] = $_POST['user'];
+            $contact['phoneNumber'] = $_POST['phoneNumber'];
+            $contact['email'] = $_POST['email'];
+            $contact['grp'] = $_POST['grp'];
+            $contact['matricule'] = $_POST['matricule'];
 
             // Vérifier si un fichier a été téléchargé
             if ($_FILES['photo']['error'] === UPLOAD_ERR_OK) {
@@ -52,7 +48,7 @@
                 move_uploaded_file($_FILES['photo']['tmp_name'], $targetPath);
 
                 // Mettre à jour le nom de la photo dans les informations de l'utilisateur
-                $user['photo'] = $targetPath;
+                $contact['photo'] = $targetPath;
               } else {
                 echo '<p>Erreur : seuls les fichiers .jpg sont autorisés.</p>';
               }
@@ -63,7 +59,7 @@
 
             // Enregistrer les modifications dans le fichier JSON
             $json_data = json_encode(['contacts' => $contacts], JSON_PRETTY_PRINT);
-            file_put_contents('../données/contacts.json', $json_data);
+            file_put_contents('../données/users2.json', $json_data);
 
             // Rediriger vers la page d'annuaire
             header('Location: ../page/GestionAnnuaire.php');
@@ -75,27 +71,27 @@
           <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label for="nom">Nom:</label>
-              <input type="text" class="form-control" id="nom" name="nom" value="' . $user['nom'] . '" required>
+              <input type="text" class="form-control" id="nom" name="nom" value="' . $user['lastName'] . '" required>
             </div>
             <div class="form-group">
               <label for="prenom">Prénom:</label>
-              <input type="text" class="form-control" id="prenom" name="prenom" value="' . $user['prenom'] . '" required>
+              <input type="text" class="form-control" id="prenom" name="prenom" value="' . $user['user'] . '" required>
             </div>
             <div class="form-group">
               <label for="numero">Numéro de Téléphone:</label>
-              <input type="text" class="form-control" id="numero" name="numero" value="' . $user['numero_telephone'] . '" required>
+              <input type="text" class="form-control" id="numero" name="numero" value="' . $user['phoneNumber'] . '" required>
             </div>
             <div class="form-group">
               <label for="mail">Adresse mail:</label>
-              <input type="email" class="form-control" id="mail" name="mail" value="' . $user['mail'] . '" required>
+              <input type="email" class="form-control" id="mail" name="mail" value="' . $user['email'] . '" required>
             </div>
             <div class="form-group">
               <label for="service">Service:</label>
-              <input type="text" class="form-control" id="service" name="service" value="' . $user['service'] . '" required>
+              <input type="text" class="form-control" id="service" name="service" value="' . $user['grp'] . '" required>
             </div>
             <div class="form-group">
               <label for="fonction">Fonction:</label>
-              <input type="text" class="form-control" id="fonction" name="fonction" value="' . $user['fonction'] . '" required>
+              <input type="text" class="form-control" id="fonction" name="fonction" value="' . $user['matricule'] . '" required>
             </div>
             <div class="form-group">
               <label for="photo">Photo de profil (fichier .jpg):</label>

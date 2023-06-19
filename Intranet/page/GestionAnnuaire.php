@@ -139,7 +139,7 @@ navbar_Intranet();
                 echo '<td>' . $contact['email'] . '</td>';
                 echo '<td>' . $contact['grp'] . '</td>';
                 echo '<td>' . $contact['matricule'] . '</td>';
-                echo '<td><a href="modifier_utilisateur.php?id=' . $id . '">Modifier</a></td>';
+                echo '<td><a href="../traitement/modif_utilisateur_traitement.php?id=' . $id . '">Modifier</a></td>';
                 echo '</tr>';
 
                 // Afficher le modal pour chaque contact
