@@ -43,7 +43,7 @@
 
     <h2>Contenu du dossier :</h2>
     <?php
-    $folder_path = "../données/fichiers_partages";
+    $folder_path = "../données/fichiers_partages/";
     $files = scandir($folder_path);
     if ($files !== false) {
         echo '<table class="table table-striped">';
