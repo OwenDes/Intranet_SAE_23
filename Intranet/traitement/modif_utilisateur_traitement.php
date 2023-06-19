@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
   <?php include '../Fonction_Intranet.php'; header_Intranet(); ?>
   <title>Modifier Utilisateur</title>
@@ -17,15 +18,19 @@
       if (isset($_GET['id'])) {
         $id = $_GET['id'];
 
+        // Vérifier si l'utilisateur existe dans la liste des contacts
+        if (isset($contacts[$id])) {
+          $user = $contacts[$id];
+
           // Vérifier si le formulaire a été soumis
           if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Mettre à jour les informations de l'utilisateur
-            $contact['lastName'] = $_POST['lastName'];
-            $contact['user'] = $_POST['user'];
-            $contact['phoneNumber'] = $_POST['phoneNumber'];
-            $contact['email'] = $_POST['email'];
-            $contact['grp'] = $_POST['grp'];
-            $contact['matricule'] = $_POST['matricule'];
+            $user['lastName'] = $_POST['nom'];
+            $user['user'] = $_POST['prenom'];
+            $user['phoneNumber'] = $_POST['numero'];
+            $user['email'] = $_POST['mail'];
+            $user['grp'] = $_POST['service'];
+            $user['matricule'] = $_POST['fonction'];
 
             // Vérifier si un fichier a été téléchargé
             if ($_FILES['photo']['error'] === UPLOAD_ERR_OK) {
@@ -48,7 +53,7 @@
                 move_uploaded_file($_FILES['photo']['tmp_name'], $targetPath);
 
                 // Mettre à jour le nom de la photo dans les informations de l'utilisateur
-                $contact['photo'] = $targetPath;
+                $user['photo'] = $targetPath;
               } else {
                 echo '<p>Erreur : seuls les fichiers .jpg sont autorisés.</p>';
               }
@@ -58,7 +63,7 @@
             $contacts[$id] = $user;
 
             // Enregistrer les modifications dans le fichier JSON
-            $json_data = json_encode(['contacts' => $contacts], JSON_PRETTY_PRINT);
+            $json_data = json_encode($contacts, JSON_PRETTY_PRINT);
             file_put_contents('../données/users2.json', $json_data);
 
             // Rediriger vers la page d'annuaire

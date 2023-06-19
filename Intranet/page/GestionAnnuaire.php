@@ -104,7 +104,6 @@ navbar_Intranet();
                 echo '</div>';
                 echo '</div>';
             }
-
             echo '</tbody>';
             echo '</table>';
         } else {
@@ -161,7 +160,6 @@ navbar_Intranet();
                 echo '</div>';
                 echo '</div>';
             }
-
             echo '</tbody>';
             echo '</table>';
         } else {
@@ -169,7 +167,5 @@ navbar_Intranet();
         }
     }
     ?>
-  </div>
+
 </div>
-</body>
-</html>
