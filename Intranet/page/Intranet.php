@@ -50,11 +50,6 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a href="#">
-                        <img class="img-fluid rounded-circle shadow-sm" src="../images/Organigramme.png" alt="Logo">
-                    </a>
-                </div>
-                <div class="col">
                     <a href="partenaires.php">
                         <img class="img-fluid rounded-circle" src="../images/Partenaire.png" alt="Logo">
                     </a>
