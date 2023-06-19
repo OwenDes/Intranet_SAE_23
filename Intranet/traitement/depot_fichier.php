@@ -70,10 +70,22 @@ header_Intranet(); navbar_Intranet() ?>
                 $file_path = $folder_path . '/' . $file;
                 $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
                 
-                if (in_array($file_extension, array('pdf','txt', 'jpg', 'jpeg', 'png'))) {
-                    echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fileModal" data-file="' . $file_path . '">Voir</button>';
-                }
-                
+                switch ($file_extension) {
+                    case 'pdf':
+                        echo '<i class="bi bi-file-pdf"></i>';
+                        break;
+                    case 'txt':
+                        echo '<i class="bi bi-file-text"></i>';
+                        break;
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'png':
+                        echo '<i class="bi bi-file-image"></i>';
+                        break;
+                    default:
+                        echo '<i class="bi bi-file-earmark"></i>';
+                        break;
+                }                
                 echo '     <a href="' . $file_path . '" download class="btn btn-secondary">Télécharger</a>';
                 echo '</td>';
                 echo '</tr>';
