@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <?php navbar_Intranet(); ?>
 
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center vh-100">
