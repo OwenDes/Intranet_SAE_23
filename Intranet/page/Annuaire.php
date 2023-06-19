@@ -1,19 +1,23 @@
-<?php include '../Fonction_Intranet.php'; 
-  session_start();
-  if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
-      header('Location: ../page/connexion.php');
-      exit();
-  }
-  header_Intranet(); navbar_Intranet() ?>
-  <div class="container">
+<?php
+include '../Fonction_Intranet.php';
+session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
+    header('Location: ../page/connexion.php');
+    exit();
+}
+header_Intranet();
+navbar_Intranet();
+?>
+
+<div class="container">
     <h1>Annuaire</h1>
 
     <form method="GET" action="#">
-      <div class="form-group">
-        <label for="search">Rechercher par numéro de téléphone, nom ou adresse e-mail :</label>
-        <input type="text" class="form-control" id="search" name="search">
-      </div>
-      <button type="submit" class="btn btn-primary my-2">Rechercher</button>
+        <div class="form-group">
+            <label for="search">Rechercher par numéro de téléphone, nom ou adresse e-mail :</label>
+            <input type="text" class="form-control" id="search" name="search">
+        </div>
+        <button type="submit" class="btn btn-primary my-2">Rechercher</button>
     </form>
 
     <?php
@@ -36,8 +40,8 @@
     }
 
     // Lire le contenu du fichier JSON
-    $json_data = file_get_contents('../données/users.json');
-    $contacts = json_decode($json_data, true);
+    $jsonContent = file_get_contents('../données/users2.json');
+    $contacts = json_decode($jsonContent, true);
 
     // Vérifier si une recherche a été effectuée
     if (isset($_GET['search'])) {
@@ -71,12 +75,12 @@
             foreach ($resultats as $id => $contact) {
                 echo '<tr>';
                 echo '<td><a href="#" data-bs-toggle="modal" data-bs-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
-                echo '<td>' . $contact['nom'] . '</td>';
-                echo '<td>' . $contact['prenom'] . '</td>';
-                echo '<td>' . $contact['numero_telephone'] . '</td>';
-                echo '<td>' . $contact['mail'] . '</td>';
-                echo '<td>' . $contact['service'] . '</td>';
-                echo '<td>' . $contact['fonction'] . '</td>';
+                echo '<td>' . $contact['lastName'] . '</td>';
+                echo '<td>' . $contact['user'] . '</td>';
+                echo '<td>' . $contact['phoneNumber'] . '</td>';
+                echo '<td>' . $contact['email'] . '</td>';
+                echo '<td>' . $contact['grp'] . '</td>';
+                echo '<td>' . $contact['matricule'] . '</td>';
                 echo '</tr>';
 
                 // Afficher le modal pour chaque contact
@@ -89,10 +93,10 @@
                 echo '</div>';
                 echo '<div class="modal-body">';
                 echo '<img src="' . $contact['photo'] . '" width="100">';
-                echo '<p>Service: ' . $contact['service'] . '</p>';
-                echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-                echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
-                echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
+                echo '<p>Service: ' . $contact['grp'] . '</p>';
+                echo '<p>Fonction: ' . $contact['matricule'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['phoneNumber'] . '</p>';
+                echo '<p>Adresse mail: ' . $contact['emaill'] . '</p>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
@@ -117,8 +121,8 @@
             echo '<th>Prénom</th>';
             echo '<th>Numéro de Téléphone</th>';
             echo '<th>Adresse mail</th>';
-            echo '<th>Service</th>';
-            echo '<th>Fonction</th>';
+            echo '<th>Groupe de travail</th>';
+            echo '<th>Matricule</th>';
             echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
@@ -126,12 +130,12 @@
             foreach ($contacts as $id => $contact) {
                 echo '<tr>';
                 echo '<td><a href="#" data-bs-toggle="modal" data-bs-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
-                echo '<td>' . $contact['nom'] . '</td>';
-                echo '<td>' . $contact['prenom'] . '</td>';
-                echo '<td>' . $contact['numero_telephone'] . '</td>';
-                echo '<td>' . $contact['mail'] . '</td>';
-                echo '<td>' . $contact['service'] . '</td>';
-                echo '<td>' . $contact['fonction'] . '</td>';
+                echo '<td>' . $contact['lastName'] . '</td>';
+                echo '<td>' . $contact['user'] . '</td>';
+                echo '<td>' . $contact['phoneNumber'] . '</td>';
+                echo '<td>' . $contact['email'] . '</td>';
+                echo '<td>' . $contact["grp"] . '</td>';
+                echo '<td>' . $contact['matricule'] . '</td>';
                 echo '</tr>';
 
                 // Afficher le modal pour chaque contact
@@ -139,15 +143,15 @@
                 echo '<div class="modal-dialog" role="document">';
                 echo '<div class="modal-content">';
                 echo '<div class="modal-header">';
-                echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['nom'] . ' ' . $contact['prenom'] . '</h5>';
+                echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['lastName'] . ' ' . $contact['user'] . '</h5>';
                 echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
                 echo '</div>';
                 echo '<div class="modal-body">';
                 echo '<img src="' . $contact['photo'] . '" width="100">';
-                echo '<p>Service: ' . $contact['service'] . '</p>';
-                echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-                echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
-                echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
+                echo '<p>Service: ' . $contact['grp'] . '</p>';
+                echo '<p>Fonction: ' . $contact['matricule'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['phoneNumber'] . '</p>';
+                echo '<p>Adresse mail: ' . $contact['email'] . '</p>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
@@ -162,3 +166,6 @@
     }
     ?>
   </div>
+</div>
+</body>
+</html>
