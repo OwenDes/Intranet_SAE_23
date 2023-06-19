@@ -7,7 +7,8 @@
     </div>
 <section>
     
-    <div class="container offset-md-2 pt-5 pb-4">
+    <div class="container-fluid offset-md-2 pt-5 pb-4 col-md-8">
+    <div class="row">
     
     <?php
 
@@ -25,7 +26,9 @@ if ($data !== null) {
         echo '<div class="container mb-5">';
         echo '<img src="' . $image . '?t=' . $timestamp . '" alt="Image" class="img-fluid shadow rounded" width="170px">';
         echo '</div>';
+        echo '<div class="container-fluid mb-5">';
         echo '<p>' . $description . '</p>';
+        echo '</div>';
         echo '</div>';
     }
 } else {
@@ -33,6 +36,9 @@ if ($data !== null) {
 }
 
 ?>
+
+</div>
+</div>
 
 </section>
 <div class="container mt-5 mb-5 text-center lead">

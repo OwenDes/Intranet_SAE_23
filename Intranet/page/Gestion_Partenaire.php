@@ -1,13 +1,10 @@
-<?php
-include '../Fonction_Intranet.php';
-header_Intranet();
-navbar_Intranet();
+<?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet();
 
-$uploadDir = '../../Intranet/images/Upload/'; // Répertoire de destination des images
-$counter = 1; // Compteur pour les noms de fichier
+$uploadDir = '../../Intranet/images/Upload/';
+$counter = 1;
 
 if (isset($_POST['submit'])) {
-    $allowedExtensions = array('png'); // Extensions de fichiers autorisées
+    $allowedExtensions = array('png','jpg','jpeg');
 
     $fileNames = array_filter($_FILES['images']['name']);
 
