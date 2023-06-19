@@ -116,11 +116,11 @@ function pagefooter_Intranet() {
   </body>
 </html>';
 }
-function connexion($usr, $mdp) {
+function connexion($email, $mdp) {
     $users = getUsers();
 
     foreach ($users as $user) {
-        if ($user['user'] === $usr) {
+        if ($user['email'] === $email) {
             if (password_verify($mdp, $user['mdp'])) {
                 $_SESSION['user'] = $user['user'];
                 $_SESSION['role'] = $user['role'];
@@ -133,6 +133,7 @@ function connexion($usr, $mdp) {
 }
 
 
+
 function deconnexion(){
     session_unset();
     session_destroy();
@@ -143,17 +144,42 @@ function getUsers(){
     return json_decode($users, true);
 }
 
-function addUser($usr, $mdp, $role = "user"){
+function generateUniqueMatricule() {
     $users = getUsers();
+    $existingMatricules = array_map(function($user) {
+        return $user['matricule'];
+    }, $users);
+
+    do {
+        $matricule = sprintf("#%03d", mt_rand(0, 999));
+    } while (in_array($matricule, $existingMatricules));
+
+    return $matricule;
+}
+
+function addUser($usr, $mdp, $role = "user", $grp = "utilisateur", $lastName = "lastName", $phoneNumber = "phoneNumber", $matricule = null){
+    $users = getUsers();
+
+    if($matricule === null) {
+        $matricule = generateUniqueMatricule();
+    }
+
+    $email = strtolower($usr . "." . $lastName . "@snis.lis");
 
     $users[$usr] = array(
         'user' => $usr,
+        'lastName' => $lastName,
         'mdp' => password_hash($mdp, PASSWORD_DEFAULT),
-        'role' => $role
+        'role' => $role,
+        'grp' => $grp,
+        'phoneNumber' => $phoneNumber,
+        'email' => $email,
+        'matricule' => $matricule
     );
 
     file_put_contents('../données/users2.json', json_encode($users));
 }
+
 
 function deleteUser($usr){
     $users = getUsers();
