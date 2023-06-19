@@ -34,15 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 header_Intranet();
 navbar_Intranet();
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Changer le mot de passe</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-</head>
-<body>
+
     <div class="container">
         <h1>Changer le mot de passe</h1>
         <?php if (isset($error)) : ?>
@@ -63,8 +55,5 @@ navbar_Intranet();
         </form>
     </div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
 
 
