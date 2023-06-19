@@ -1,7 +1,20 @@
-<?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet() ?>
+<?php include '../Fonction_Intranet.php'; 
+session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
+    header('Location: ../page/connexion.php');
+    exit();
+}
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header('Location: ../page/Intranet.php');
+    exit();
+}
 
-<div class="container">
-  <h1>Upload de fichiers</h1>
+
+
+
+header_Intranet(); navbar_Intranet() ?>
+  <div class="container">
+    <h1>Upload de fichiers</h1>
 
   <form name='upload' method='post' action='' enctype='multipart/form-data'>
     <div class="mb-3">

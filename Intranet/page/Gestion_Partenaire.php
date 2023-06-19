@@ -1,4 +1,7 @@
-<?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet();
+<?php
+include '../Fonction_Intranet.php';
+header_Intranet();
+navbar_Intranet();
 
 $uploadDir = '../../Intranet/images/Upload/';
 $counter = 1;

@@ -1,5 +1,13 @@
 <?php
 session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
+    header('Location: ../page/connexion.php');
+    exit();
+}
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header('Location: ../page/Intranet.php');
+    exit();
+}
 
 require_once('../Fonction_Intranet.php');
 

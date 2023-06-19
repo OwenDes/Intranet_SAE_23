@@ -1,6 +1,16 @@
 <?php
 require_once '../dompdf/autoload.inc.php';
 include '../Fonction_Intranet.php'; 
+
+session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
+    header('Location: ../page/connexion.php');
+    exit();
+}
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header('Location: ../page/Intranet.php');
+    exit();
+}
 header_Intranet(); navbar_Intranet();
 
 
