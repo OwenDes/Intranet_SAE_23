@@ -17,22 +17,14 @@ function header_Intranet() {
         <title>SNIS du Listenbourg</title>
     </head>';
 
-    echo '<body class="bg-light">';
-    
-    if (isset($_SESSION['user'])) {
-        echo '<div class="col main-content text-center">
+    echo '
+    <body class="bg-light">
+        <div class="col main-content text-center">
             <div class="horizontal p-2 mt-3 shadow-sm bg-white container-fluid">
                 <a href="../page/Intranet.php"><img class="img-fluid rounded-circle" src="../images/logo.png" alt="Logo" width="100" height="100"></a>
             </div>
         </div>';
-    } else {
-        echo '<div class="col main-content text-center">
-            <div class="horizontal p-2 mt-3 shadow-sm bg-white container-fluid">
-                <a href="connexion.php"><img class="img-fluid rounded-circle" src="../images/logo.png" alt="Logo" width="100" height="100"></a>
-            </div>
-        </div>';
-    }
-}
+}    
 
 function navbar_Intranet(){
     echo'<div class="container-fluid">

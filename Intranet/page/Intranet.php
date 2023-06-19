@@ -1,6 +1,10 @@
     <?php
     include '../Fonction_Intranet.php';
 
+    // if (!isset($_SESSION['user'])) {
+    //     header('Location: ../page/connexion.php');
+    // }
+
     // Vérifier l'authentification de l'utilisateur et le rôle
     session_start();
 
