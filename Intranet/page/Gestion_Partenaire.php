@@ -12,53 +12,52 @@ if (isset($_POST['submit'])) {
     $fileNames = array_filter($_FILES['images']['name']);
 
     if (!empty($fileNames) && !empty($_POST['description'])) {
-        $partnerData = json_decode(file_get_contents('../données/partenaires.json'), true); // Charger le contenu du fichier JSON existant
+        $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true); // Charger le contenu du fichier JSON existant
 
-        if ($partnerData !== null) {
-            $description = $_POST['description'];
+        $description = $_POST['description'];
+        if (isset($partnerData) && is_array($partnerData)) {
             $counter = count($partnerData) + 1; // Obtenir le nombre actuel de partenaires pour la numérotation continue
+        } // Obtenir le nombre actuel de partenaires pour la numérotation continue
 
-            foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
-                $fileName = $_FILES['images']['name'][$key];
-                $fileTmp = $_FILES['images']['tmp_name'][$key];
-                $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
+            $fileName = $_FILES['images']['name'][$key];
+            $fileTmp = $_FILES['images']['tmp_name'][$key];
+            $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-                if (in_array($fileExt, $allowedExtensions)) {
-                    $newFileName = sprintf('%02d', $counter) . '.png'; // Utilisation de sprintf pour formater le compteur à deux chiffres
-                    $destination = $uploadDir . $newFileName;
+            if (in_array($fileExt, $allowedExtensions)) {
+                $newFileName = sprintf('%02d', $counter) . '.png'; // Utilisation de sprintf pour formater le compteur à deux chiffres
+                $destination = $uploadDir . $newFileName;
 
-                    if (move_uploaded_file($fileTmp, $destination)) {
-                        // Le fichier a été téléchargé avec succès, vous pouvez effectuer d'autres opérations ici si nécessaire
-                        echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
+                if (move_uploaded_file($fileTmp, $destination)) {
+                    // Le fichier a été téléchargé avec succès, vous pouvez effectuer d'autres opérations ici si nécessaire
+                    echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
 
-                        $data = array(
-                            'description' => $description,
-                            'image' => '../../Intranet/images/Upload/' . $newFileName // Ajouter le lien de l'image
-                        );
+                    $data = array(
+                        'description' => $description,
+                        'image' => '../../Intranet/images/Upload/' . $newFileName // Ajouter le lien de l'image
+                    );
 
-                        $partnerData[] = $data; // Ajouter la nouvelle ligne de données
+                    $partnerData[] = $data; // Ajouter la nouvelle ligne de données
 
-                        echo 'Description enregistrée avec succès !<br>';
+                    echo 'Description enregistrée avec succès !<br>';
 
-                        $counter++;
-                    } else {
-                        echo 'Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.<br>';
-                    }
+                    $counter++;
                 } else {
-                    echo 'Le fichier ' . $fileName . ' n\'est pas une image valide.<br>';
+                    echo 'Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.<br>';
                 }
+            } else {
+                echo 'Le fichier ' . $fileName . ' n\'est pas une image valide.<br>';
             }
-
-            $jsonData = json_encode($partnerData); // Convertir le tableau en JSON
-
-            file_put_contents('../données/partenaires.json', $jsonData); // Écrire les données dans le fichier JSON
-        } else {
-            echo 'Erreur lors de la lecture du fichier JSON des partenaires.';
         }
+
+        $jsonData = json_encode($partnerData); // Convertir le tableau en JSON
+
+        file_put_contents('../données/Partenaires.json', $jsonData); // Écrire les données dans le fichier JSON
     } else {
         echo 'Veuillez sélectionner au moins une image à télécharger et saisir une description avant de l\'enregistrer.';
     }
 }
+
 
 if (isset($_GET['delete'])) {
     $imageToDelete = $_GET['delete'];
@@ -78,7 +77,7 @@ if (isset($_GET['delete'])) {
 if (isset($_GET['delete_description'])) {
     $descriptionToDelete = $_GET['delete_description'];
 
-    $partnerData = json_decode(file_get_contents('../données/partenaires.json'), true);
+    $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
     foreach ($partnerData as $key => $partner) {
         if ($partner['description'] === $descriptionToDelete) {
@@ -88,7 +87,7 @@ if (isset($_GET['delete_description'])) {
     }
 
     $jsonData = json_encode($partnerData);
-    file_put_contents('../données/partenaires.json', $jsonData);
+    file_put_contents('../données/Partenaires.json', $jsonData);
 
     echo 'La description a été supprimée avec succès du fichier JSON.';
 }
@@ -100,20 +99,17 @@ if (!empty($uploadedImages)) {
     echo '<h2>Images stockées :</h2>';
     echo '<div class="container">';
     echo '<div class="row">';
-    $displayCounter = 1; // Compteur pour les images affichées
     foreach ($uploadedImages as $image) {
         echo '<div class="col-md-3">';
         echo '<img src="' . $uploadDir . $image . '" alt="' . $image . '" class="img-thumbnail">';
         echo '<a href="?delete=' . $image . '" class="btn btn-danger btn-sm mt-2">Supprimer</a>';
         echo '</div>';
-
-        $displayCounter++; // Incrémenter le compteur d'images affichées
     }
     echo '</div>';
     echo '</div>';
 }
 
-$partnerData = json_decode(file_get_contents('../données/partenaires.json'), true);
+$partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
 if (!empty($partnerData)) {
     echo '<h2>Descriptions des partenaires :</h2>';
