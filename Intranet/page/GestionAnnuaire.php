@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<head>
-  <?php include '../Fonction_Intranet.php'; header_Intranet(); ?>
+ <?php include '../Fonction_Intranet.php'; header_Intranet(); ?>
 
   <div class="container">
     <h1>Annuaire</h1>

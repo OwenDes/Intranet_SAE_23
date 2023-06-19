@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <head>
   <?php include '../Fonction_Intranet.php'; header_Intranet(); navbar_Intranet() ?>
   <div class="container">
