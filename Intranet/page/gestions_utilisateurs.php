@@ -11,14 +11,12 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] != 'admin') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = $_POST['action'];
     if ($action == 'add') {
-        if (!isset($_POST['user'])) {
-            echo "Veuillez fournir un nom d'utilisateur.";
-            exit();
-        }
         $user = $_POST['user'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $role = $_POST['role'];
-        addUser($user, $password, $role);
+        if ($user!=""){
+            addUser($user, $password, $role);
+        }    
     } else if ($action == 'modify') {
         $user = $_POST['user'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
