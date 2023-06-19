@@ -3,6 +3,9 @@ session_start();
 
 include '../Fonction_Intranet.php';
 
+$email = '';
+$password = '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -39,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">            
                 <div class="form-group">
                     <label for="email" class="form-label">Adresse email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>" required>
                 </div>
                     <div class="form-group">
                     <label for="password" class="form-label">Mot de passe</label>
