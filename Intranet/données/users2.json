@@ -1,1 +1,19 @@
-{"admin":{"user":"admin","mdp":"$2y$10$CoalAxcI4w3C63G0AIrRx.B5hTtma6EDiLibZre5\/MSdilJZd2HNS","role":"admin"},"user":{"user":"user","mdp":"$2y$10$LgFIgkuBZX\/rTvGuaB9rounP3\/4qYkTj\/I35MgRGUnnpeabFmksKa","role":"user"},"mathis":{"user":"mathis","mdp":"$2y$10$pBh72aBzySVlrmH82gZzHuhEXBZKqk7FC8fH8tbTde8K.Rov0.tmi","role":"user"}}
+{
+    "admin":{
+        "user":"admin",
+        "mdp":"$2y$10$CoalAxcI4w3C63G0AIrRx.B5hTtma6EDiLibZre5\/MSdilJZd2HNS",
+        "role":"admin"
+        },
+    
+    "user":{
+        "user":"user",
+        "mdp":"$2y$10$LgFIgkuBZX\/rTvGuaB9rounP3\/4qYkTj\/I35MgRGUnnpeabFmksKa",
+        "role":"user"
+        },
+    
+    "mathis":{
+        "user":"mathis",
+        "mdp":"$2y$10$pBh72aBzySVlrmH82gZzHuhEXBZKqk7FC8fH8tbTde8K.Rov0.tmi",
+        "role":"user"
+        }
+}
