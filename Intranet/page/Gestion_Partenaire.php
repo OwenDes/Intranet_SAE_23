@@ -16,51 +16,51 @@ echo '</div>';
 navbar_Intranet();
 echo '<br>';
 
-$uploadDir = '../../Intranet/images/Upload/';
-$counter = 1;
+$dossier_upload = '../../Intranet/images/Upload/';
+$compteur = 1;
 
 if (isset($_POST['submit'])) {
-    $allowedExtensions = array('png','jpg','jpeg');
+    $Extension_autorisées = array('png','jpg','jpeg');
 
-    $fileNames = array_filter($_FILES['images']['name']);
+    $nom_fichier = array_filter($_FILES['images']['name']);
 
-    if (!empty($fileNames) && !empty($_POST['description'])) {
-        $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
+    if (!empty($nom_fichier) && !empty($_POST['description'])) {
+        $partenaires = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
         $description = $_POST['description'];
-        if (isset($partnerData) && is_array($partnerData)) {
-            $counter = count($partnerData) + 1;
+        if (isset($partenaires) && is_array($partenaires)) {
+            $compteur = count($partenaires) + 1;
         } 
 
         foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
-            $fileName = $_FILES['images']['name'][$key];
-            $fileTmp = $_FILES['images']['tmp_name'][$key];
-            $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+            $nomfichier = $_FILES['images']['name'][$key];
+            $Emplacement_temporaire = $_FILES['images']['tmp_name'][$key];
+            $Extension_fichier = strtolower(pathinfo($nomfichier, PATHINFO_EXTENSION));
 
-            if (in_array($fileExt, $allowedExtensions)) {
-                $newFileName = sprintf('%02d', $counter) . '.png';
-                $destination = $uploadDir . $newFileName;
+            if (in_array($Extension_fichier, $Extension_autorisées)) {
+                $newnomfichier = sprintf('%02d', $compteur) . '.png';
+                $destination = $dossier_upload . $newnomfichier;
 
-                if (move_uploaded_file($fileTmp, $destination)) {
-                    echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Le fichier ' . $fileName . ' a été téléchargé avec succès !</p><br>';
+                if (move_uploaded_file($Emplacement_temporaire, $destination)) {
+                    echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Le fichier ' . $nomfichier . ' a été téléchargé avec succès !</p><br>';
                     $data = array(
                         'description' => nl2br($description),
 
-                        'image' => '../../Intranet/images/Upload/' . $newFileName
+                        'image' => '../../Intranet/images/Upload/' . $newnomfichier
                     );
 
-                    $partnerData[] = $data;
+                    $partenaires[] = $data;
                     echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Description enregistrée avec succès !</p><br>';
-                    $counter++;
+                    $compteur++;
                 } else {
-                    echo '<p class="bg-danger text-white text-center rounded my-2 p-2">Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.</p><br>';
+                    echo '<p class="bg-danger text-white text-center rounded my-2 p-2">Une erreur est survenue lors du téléchargement du fichier ' . $nomfichier . '.</p><br>';
                 }
             } else {
-                echo '<p class="bg-danger text-white text-center rounded my-2 p-2">Le fichier ' . $fileName . ' n\'est pas une image valide.</p><br>';
+                echo '<p class="bg-danger text-white text-center rounded my-2 p-2">Le fichier ' . $nomfichier . ' n\'est pas une image valide.</p><br>';
             }
         }
 
-        $jsonData = json_encode($partnerData);
+        $jsonData = json_encode($partenaires);
 
         file_put_contents('../données/Partenaires.json', $jsonData);
     } else {
@@ -70,50 +70,50 @@ if (isset($_POST['submit'])) {
 
 
 if (isset($_GET['delete'])) {
-    $imageToDelete = $_GET['delete'];
-    $filePath = $uploadDir . $imageToDelete;
+    $image_suppr = $_GET['delete'];
+    $chemin_fichier_suppr = $dossier_upload . $image_suppr;
 
-    if (file_exists($filePath)) {
-        if (unlink($filePath)) {
-            echo '<p class="bg-secondary">\'image ' . $imageToDelete . ' a été supprimée avec succès.</p><br>';
+    if (file_exists($chemin_fichier_suppr)) {
+        if (unlink($chemin_fichier_suppr)) {
+            echo '<p class="bg-secondary">\'image ' . $image_suppr . ' a été supprimée avec succès.</p><br>';
         } else {
-            echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Une erreur est survenue lors de la suppression de l\'image ' . $imageToDelete . '.</p><br>';
+            echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Une erreur est survenue lors de la suppression de l\'image ' . $image_suppr . '.</p><br>';
         }
     } else {
-        echo '<p class="bg-danger text-white text-center rounded my-2 p-2">L\'image ' . $imageToDelete . ' n\'existe pas !</p><br>';
+        echo '<p class="bg-danger text-white text-center rounded my-2 p-2">L\'image ' . $image_suppr . ' n\'existe pas !</p><br>';
     }
 }
 
 if (isset($_GET['delete_description'])) {
-    $descriptionToDelete = $_GET['delete_description'];
+    $description_suppr = $_GET['delete_description'];
 
-    $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
+    $partenaires = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
-    foreach ($partnerData as $key => $partner) {
-        if (strcmp($partner['description'], $descriptionToDelete) === 0) {
-            unset($partnerData[$key]);
+    foreach ($partenaires as $key => $partenaire) {
+        if (strcmp($partenaire['description'], $description_suppr) === 0) {
+            unset($partenaires[$key]);
             break;
         }
     }
     
 
-    $jsonData = json_encode($partnerData);
+    $jsonData = json_encode($partenaires);
     file_put_contents('../données/Partenaires.json', $jsonData);
 
     echo '<p class="bg-primary text-white text-center rounded my-2 p-2">La description a été supprimée avec succès du fichier JSON.</p><br>';
 }
 
-$uploadedImages = scandir($uploadDir);
-$uploadedImages = array_diff($uploadedImages, array('.', '..'));
+$Image_upload = scandir($dossier_upload);
+$Image_upload = array_diff($Image_upload, array('.', '..'));
 
-if (!empty($uploadedImages)) {
+if (!empty($Image_upload)) {
     echo '<div class="bg-white p-2 shadow rounded">';
     echo '<h1>Images stockées :</h1>';
     echo '<div class="container text-center">';
     echo '<div class="row">';
-    foreach ($uploadedImages as $image) {
+    foreach ($Image_upload as $image) {
         echo '<div class="col">';
-        echo '<img src="' . $uploadDir . $image . '" alt="' . $image . '" class="img-thumbnail">';
+        echo '<img src="' . $dossier_upload . $image . '" alt="' . $image . '" class="img-thumbnail">';
         echo '<a href="?delete=' . $image . '" class="btn btn-danger btn-sm mt-2 img-fluid">Supprimer</a>';
         echo '</div>';
     }
@@ -122,17 +122,17 @@ if (!empty($uploadedImages)) {
     echo '</div>';
 }
 
-$partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
+$partenaires = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
-if (!empty($partnerData)) {
+if (!empty($partenaires)) {
     echo '<div class="bg-white p-2 my-3 shadow rounded">';
     echo '<h1>Descriptions des partenaires :</h1>';
     echo '<div class="container">';
     echo '<div class="row">';
-    foreach ($partnerData as $partner) {
+    foreach ($partenaires as $partenaire) {
         echo '<div class="col">';
-        echo '<p>' . $partner['description'] . '</p>';
-        echo '<a href="?delete_description=' . $partner['description'] . '" class="btn btn-danger btn-sm mt-2">Supprimer</a>';
+        echo '<p>' . $partenaire['description'] . '</p>';
+        echo '<a href="?delete_description=' . $partenaire['description'] . '" class="btn btn-danger btn-sm mt-2">Supprimer</a>';
         echo '</div>';
     }
     echo '</div>';
