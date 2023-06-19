@@ -18,7 +18,8 @@ navbar_Intranet();
             <label for="fichier" class="form-label">Choisir un fichier :</label>
             <input type="file" class="form-control" id="fichier" name="fichier">
         </div>
-        <button type="submit" name="valider" class="btn btn-primary">Envoyer</button>
+        <hr>
+        <button type="submit" name="valider" class="btn btn-primary mb-2">Envoyer</button>
     </form>
 
     <?php

@@ -31,17 +31,17 @@
                   <div class="col container">
 	                <span class="num" data-val="2000">000</span>
                     <br>
-                    <span class="text">sapeur pompier professionnels</span>
+                    <span class="text">sapeurs-pompiers professionnels</span>
                   </div>
                   <div class="col container">
                     <span class="num" data-val="420">000</span>
                     <br>
-                    <span class="text">jeunes sapeur pompier formés</span>
+                    <span class="text">jeunes sapeurs-pompiers formés</span>
                   </div>
                   <div class="col container">
                     <span class="num" data-val="320">000</span>
                     <br>
-                    <span class="text">chats recuperé dans des arbres</span>
+                    <span class="text">chats récupérés dans des arbres</span>
                   </div>
                   <script src="../js/num1.js"></script>
                 </div>
