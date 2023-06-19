@@ -99,7 +99,7 @@ function pageheader_2() {
                             <li><a class="dropdown-item" href="Organisation_sur_le_territoire.php">Organisation sur le territoire</a></li>
                             <li><a class="dropdown-item" href="interventions.php">Nos interventions</a></li>
                             <li><a class="dropdown-item" href="Préventions_et_révisions.php">Préventions et révisions</a></li>
-                            <li><a class="dropdown-item" href="partenaire.php">Partenaire</a></li>
+                            <li><a class="dropdown-item" href="partenaires.php">Partenaire</a></li>
                             <li><a class="dropdown-item" href="notre_histoire.php">Notre histoire</a></li>
                         </ul>
                         </li>

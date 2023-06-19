@@ -39,6 +39,7 @@
                 echo '</div>';
             }
             ?>
+            <hr>
         </div>
         <div class="container mb-3 mt-5">
             <h1 class="mb-3 text-center">Les différents outils :</h1>
@@ -59,7 +60,7 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a href="#">
+                    <a href="depot_fichier.php">
                         <img class="img-fluid rounded-circle" src="../images/test.png" alt="Logo">
                     </a>
                 </div>
@@ -70,6 +71,7 @@
                 </div>
             </div>
         </div>
+        <hr>
         <?php if ($estAdmin) { ?>
             <div class="container">
                 <h1 class="mt-3 text-center">Les outils de gestion :</h1>
