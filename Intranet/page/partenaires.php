@@ -32,7 +32,7 @@ if ($data !== null) {
         $image = $item->image;
         $timestamp = time(); // Obtient le timestamp actuel
 
-        echo '<div class="container mb-5 lead">';
+        echo '<div class="container mb-5 lead text-center">';
         echo '<div class="container mb-5">';
         echo '<img src="' . $image . '?t=' . $timestamp . '" alt="Image" class="img-fluid shadow rounded" width="170px">';
         echo '</div>';

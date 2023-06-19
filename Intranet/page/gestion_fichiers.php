@@ -54,8 +54,8 @@ header_Intranet(); navbar_Intranet() ?>
       }
   }
   ?>
-
-  <h2>Contenu du dossier :</h2>
+  <hr>
+  <h1>Contenu du dossier :</h1>
   <?php
   $folder_path = "../données/fichiers_partages/";
   $files = scandir($folder_path);

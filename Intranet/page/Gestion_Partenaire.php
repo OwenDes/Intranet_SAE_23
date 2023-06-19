@@ -1,7 +1,20 @@
 <?php
 include '../Fonction_Intranet.php';
+
+session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
+    header('Location: ../page/connexion.php');
+    exit();
+}
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header('Location: ../page/Intranet.php');
+    exit();
+}
+
 header_Intranet();
+echo '</div>';
 navbar_Intranet();
+echo '<br>';
 
 $uploadDir = '../../Intranet/images/Upload/';
 $counter = 1;
@@ -29,20 +42,20 @@ if (isset($_POST['submit'])) {
                 $destination = $uploadDir . $newFileName;
 
                 if (move_uploaded_file($fileTmp, $destination)) {
-                    echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
+                    echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Le fichier ' . $fileName . ' a été téléchargé avec succès !</p><br>';
                     $data = array(
                         'description' => $description,
                         'image' => '../../Intranet/images/Upload/' . $newFileName
                     );
 
                     $partnerData[] = $data;
-                    echo 'Description enregistrée avec succès !<br>';
+                    echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Description enregistrée avec succès !</p><br>';
                     $counter++;
                 } else {
-                    echo 'Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.<br>';
+                    echo '<p class="bg-danger text-white text-center rounded my-2 p-2">Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.</p><br>';
                 }
             } else {
-                echo 'Le fichier ' . $fileName . ' n\'est pas une image valide.<br>';
+                echo '<p class="bg-danger text-white text-center rounded my-2 p-2">Le fichier ' . $fileName . ' n\'est pas une image valide.</p><br>';
             }
         }
 
@@ -50,7 +63,7 @@ if (isset($_POST['submit'])) {
 
         file_put_contents('../données/Partenaires.json', $jsonData);
     } else {
-        echo 'Veuillez sélectionner au moins une image à télécharger et saisir une description avant de l\'enregistrer.';
+        echo '<p class="bg-danger text-white text-center rounded my-2 p-2">Veuillez sélectionner au moins une image à télécharger et saisir une description avant de l\'enregistrer.</p><br>';
     }
 }
 
@@ -61,12 +74,12 @@ if (isset($_GET['delete'])) {
 
     if (file_exists($filePath)) {
         if (unlink($filePath)) {
-            echo 'L\'image ' . $imageToDelete . ' a été supprimée avec succès.<br>';
+            echo '<p class="bg-secondary">\'image ' . $imageToDelete . ' a été supprimée avec succès.</p><br>';
         } else {
-            echo 'Une erreur est survenue lors de la suppression de l\'image ' . $imageToDelete . '.<br>';
+            echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Une erreur est survenue lors de la suppression de l\'image ' . $imageToDelete . '.</p><br>';
         }
     } else {
-        echo 'L\'image ' . $imageToDelete . ' n\'existe pas.<br>';
+        echo '<p class="bg-danger text-white text-center rounded my-2 p-2">L\'image ' . $imageToDelete . ' n\'existe pas !</p><br>';
     }
 }
 
@@ -85,22 +98,24 @@ if (isset($_GET['delete_description'])) {
     $jsonData = json_encode($partnerData);
     file_put_contents('../données/Partenaires.json', $jsonData);
 
-    echo 'La description a été supprimée avec succès du fichier JSON.';
+    echo '<p class="bg-primary text-white text-center rounded my-2 p-2">La description a été supprimée avec succès du fichier JSON.</p><br>';
 }
 
 $uploadedImages = scandir($uploadDir);
 $uploadedImages = array_diff($uploadedImages, array('.', '..'));
 
 if (!empty($uploadedImages)) {
-    echo '<h2>Images stockées :</h2>';
-    echo '<div class="container">';
+    echo '<div class="bg-white p-2 shadow rounded">';
+    echo '<h1>Images stockées :</h1>';
+    echo '<div class="container text-center">';
     echo '<div class="row">';
     foreach ($uploadedImages as $image) {
-        echo '<div class="col-md-3">';
+        echo '<div class="col">';
         echo '<img src="' . $uploadDir . $image . '" alt="' . $image . '" class="img-thumbnail">';
-        echo '<a href="?delete=' . $image . '" class="btn btn-danger btn-sm mt-2">Supprimer</a>';
+        echo '<a href="?delete=' . $image . '" class="btn btn-danger btn-sm mt-2 img-fluid">Supprimer</a>';
         echo '</div>';
     }
+    echo '</div>';
     echo '</div>';
     echo '</div>';
 }
@@ -108,48 +123,40 @@ if (!empty($uploadedImages)) {
 $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
 if (!empty($partnerData)) {
-    echo '<h2>Descriptions des partenaires :</h2>';
+    echo '<div class="bg-white p-2 my-3 shadow rounded">';
+    echo '<h1>Descriptions des partenaires :</h1>';
     echo '<div class="container">';
     echo '<div class="row">';
     foreach ($partnerData as $partner) {
-        echo '<div class="col-md-6">';
+        echo '<div class="col">';
         echo '<p>' . $partner['description'] . '</p>';
         echo '<a href="?delete_description=' . $partner['description'] . '" class="btn btn-danger btn-sm mt-2">Supprimer</a>';
         echo '</div>';
     }
     echo '</div>';
     echo '</div>';
+    echo '</div>';
 }
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Dépôt d'images</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
+    <div class="bg-white p-2 mt-3 mb-5 shadow rounded">
         <h1 >Dépôt de votre image :</h1>
         <form method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="images" class="lead"><br>Sélectionnez l'image que vous souhaitez au format PNG :</label><br>
                 <input type="file" name="images[]" id="images" multiple accept="image/jpeg, image/png" required>
             </div>
+            <hr>
             <div class="form-group">
                 <label for="description" class="lead">Saissisez la desciption :</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary">Envoyer</button>
+            <hr>
+            <button type="submit" name="submit" class="btn btn-primary my-2">Envoyer</button>
         </form>
     </div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-</html>
 
 <?php pagefooter_Intranet(); ?>
