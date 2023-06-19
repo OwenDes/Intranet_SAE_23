@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
                 if (move_uploaded_file($fileTmp, $destination)) {
                     echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
                     $data = array(
-                        'description' => $description,
+                        'description' => nl2br($description),
                         'image' => '../../Intranet/images/Upload/' . $newFileName
                     );
 
