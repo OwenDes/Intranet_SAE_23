@@ -152,12 +152,19 @@ function generateUniqueMatricule() {
         return $user['matricule'];
     }, $users);
 
-    do {
-        $matricule = sprintf("#%03d", mt_rand(0, 999));
-    } while (in_array($matricule, $existingMatricules));
+    $allMatricules = array_map(function($number) {
+        return sprintf("#%03d", $number);
+    }, range(0, 999));
+    sort($allMatricules);
 
-    return $matricule;
+    foreach ($allMatricules as $matricule) {
+        if (!in_array($matricule, $existingMatricules)) {
+            return $matricule;
+        }
+    }
+    return false;
 }
+
 
 function addUser($usr, $mdp, $role = "user", $grp = "utilisateur", $lastName = "lastName", $phoneNumber = "phoneNumber", $matricule = null){
     $users = getUsers();
