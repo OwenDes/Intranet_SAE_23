@@ -15,7 +15,7 @@
     ?>
     <div>
         <hr>
-        <h3 class="text-center">Actualitées</h3><br>
+        <h3 class="text-center">Actualités</h3><br>
         <div class="container">
             <?php
             $donnees_json = file_get_contents("../données/actualites.json");
