@@ -4,17 +4,16 @@ session_start();
 include '../Fonction_Intranet.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (connexion($username, $password)) {
+    if (connexion($email, $password)) {
         header('Location: ../page/Intranet.php');
         exit;
     } else {
         $error = 'Identifiants incorrects, veuillez réessayer.';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row justify-content-center align-items-center vh-100">
         <div class="col-md-4 col-sm-12 p-5 bg-white rounded shadow">
             <h3 class="display-6">Connexion</h3>
-            <p>Entrez votre nom d'utilisateur et votre mot de passe</p>
+            <p>Entrez votre adresse email et votre mot de passe</p>
             <?php if (isset($error)) : ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo $error; ?>
@@ -39,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endif; ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">            
                 <div class="form-group">
-                    <label for="username" class="form-label">Utilisateur</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Utilisateur" required>
+                    <label for="email" class="form-label">Adresse email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                 </div>
                     <div class="form-group">
                     <label for="password" class="form-label">Mot de passe</label>
