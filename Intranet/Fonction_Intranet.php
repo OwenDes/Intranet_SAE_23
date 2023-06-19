@@ -54,16 +54,16 @@ function navbar_Intranet(){
                   <div class="offcanvas-header">
                       <i class="fa-sharp fa-solid fa-user fa-2xl img-fluid"></i>
                       <div class="text-center">';
-                      echo "<p>Nom: $lastName</p><br><p>Prénom: $user</p>";
+                      echo "<h3> $lastName $user</h3>";
                       echo '</div>
                           <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                       </div>
                       <div class="offcanvas-body">
                           <div>';
-                              echo'<p><i class="fa-sharp fa-solid fa-users"></i>'; echo" Rôle: $role</p>";
-                              echo'<p><i class="fa-solid fa-phone"></i>'; echo" Numéro: $phoneNumber</p>";
-                              echo'<p><i class="fa-sharp fa-solid fa-address-card"></i>';echo" Matricule: $matricule</p>";
-                              echo'<p><i class="fa-sharp fa-solid fa-envelope"></i>'; echo" Email: $email</p>";
+                              echo'<p><i class="fa-sharp fa-solid fa-users"></i>'; echo" $role</p>";
+                              echo'<p><i class="fa-solid fa-phone"></i>'; echo" $phoneNumber</p>";
+                              echo'<p><i class="fa-sharp fa-solid fa-address-card"></i>';echo" $matricule</p>";
+                              echo'<p><i class="fa-sharp fa-solid fa-envelope"></i>'; echo" $email</p>";
                               echo'<ul class="nav flex-column text-center mt-4">
                                   <li class="nav-item border">
                                       <a class="nav-link text-dark" href="Intranet.php">Accueil</a>
