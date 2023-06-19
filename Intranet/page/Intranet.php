@@ -55,7 +55,7 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a href="../../Frontal/page/partenaires.php">
+                    <a href="partenaires.php">
                         <img class="img-fluid rounded-circle" src="../images/Partenaire.png" alt="Logo">
                     </a>
                 </div>
