@@ -8,9 +8,9 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role']
 
 header_Intranet();
 navbar_Intranet();
-echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
 ?>
 
 <div class="container">
