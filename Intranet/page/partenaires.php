@@ -30,7 +30,7 @@ if ($data !== null) {
     foreach ($data as $item) {
         $description = $item->description;
         $image = $item->image;
-        $timestamp = time(); // Obtient le timestamp actuel
+        $timestamp = time();
 
         echo '<div class="container mb-5 lead text-center">';
         echo '<div class="container mb-5">';

@@ -44,7 +44,8 @@ if (isset($_POST['submit'])) {
                 if (move_uploaded_file($fileTmp, $destination)) {
                     echo '<p class="bg-primary text-white text-center rounded my-2 p-2">Le fichier ' . $fileName . ' a été téléchargé avec succès !</p><br>';
                     $data = array(
-                        'description' => $description,
+                        'description' => nl2br($description),
+
                         'image' => '../../Intranet/images/Upload/' . $newFileName
                     );
 
@@ -89,11 +90,12 @@ if (isset($_GET['delete_description'])) {
     $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
     foreach ($partnerData as $key => $partner) {
-        if ($partner['description'] === $descriptionToDelete) {
+        if (strcmp($partner['description'], $descriptionToDelete) === 0) {
             unset($partnerData[$key]);
             break;
         }
     }
+    
 
     $jsonData = json_encode($partnerData);
     file_put_contents('../données/Partenaires.json', $jsonData);
