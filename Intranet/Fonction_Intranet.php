@@ -227,5 +227,46 @@ function updateUserPassword($username, $newPassword)
     return false;
 }
 
+function getGroups() {
+    $groups = file_get_contents('../données/groups.json');
+    return json_decode($groups, true);
+}
+
+function addGroup($group, $phoneNumber) {
+    $groups = getGroups();
+
+    $groups[$group] = array(
+        'group' => $group,
+        'phoneNumber' => $phoneNumber
+    );
+
+    file_put_contents('../données/groups.json', json_encode($groups));
+}
+
+function modifyGroup($group, $phoneNumber){
+    $groups = getGroups();
+
+    if (isset($groups[$group])) {
+        $groups[$group]['phoneNumber'] = $phoneNumber;
+        file_put_contents('../données/groups.json', json_encode($groups));
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function deleteGroup($group){
+    $groups = getGroups();
+
+    if (isset($groups[$group])) {
+        unset($groups[$group]);
+        file_put_contents('../données/groups.json', json_encode($groups));
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 ?>
 

@@ -12,18 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($action == 'add') {
         $group = $_POST['group'];
         $phoneNumber = $_POST['phoneNumber'];
-        addGroup($group, $phoneNumber); // Assumant cette fonction existe
+        addGroup($group, $phoneNumber); 
     } else if ($action == 'modify') {
         $group = $_POST['group'];
         $phoneNumber = $_POST['phoneNumber'];
-        modifyGroup($group, $phoneNumber); // Assumant cette fonction existe
+        modifyGroup($group, $phoneNumber); 
     } else if ($action == 'delete') {
         $group = $_POST['group'];
-        deleteGroup($group); // Assumant cette fonction existe
+        deleteGroup($group); 
     }
 }
 
-$groups = getGroups(); // Assumant cette fonction existe
+$groups = getGroups(); 
 ?>
 
 <!DOCTYPE html>
