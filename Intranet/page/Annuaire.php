@@ -32,14 +32,14 @@
     }
 
     // Lire le contenu du fichier JSON
-    $json_data = file_get_contents('../données/contacts.json');
+    $json_data = file_get_contents('../données/users.json');
     $contacts = json_decode($json_data, true);
 
     // Vérifier si une recherche a été effectuée
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
         // Exécuter la recherche par numéro de téléphone, nom ou adresse e-mail
-        $resultats = rechercherContact($contacts, 'numero_telephone', $search);
+        $resultats = rechercherContact($contacts, 'numero', $search);
         $resultats = array_merge($resultats, rechercherContact($contacts, 'nom', $search));
         $resultats = array_merge($resultats, rechercherContact($contacts, 'mail', $search));
 
@@ -66,10 +66,10 @@
 
             foreach ($resultats as $id => $contact) {
                 echo '<tr>';
-                echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
+                echo '<td><a href="#" data-bs-toggle="modal" data-bs-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
                 echo '<td>' . $contact['nom'] . '</td>';
                 echo '<td>' . $contact['prenom'] . '</td>';
-                echo '<td>' . $contact['numero'] . '</td>';
+                echo '<td>' . $contact['numero_telephone'] . '</td>';
                 echo '<td>' . $contact['mail'] . '</td>';
                 echo '<td>' . $contact['service'] . '</td>';
                 echo '<td>' . $contact['fonction'] . '</td>';
@@ -81,15 +81,13 @@
                 echo '<div class="modal-content">';
                 echo '<div class="modal-header">';
                 echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['nom'] . ' ' . $contact['prenom'] . '</h5>';
-                echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-                echo '<span aria-hidden="true">&times;</span>';
-                echo '</button>';
+                echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
                 echo '</div>';
                 echo '<div class="modal-body">';
                 echo '<img src="' . $contact['photo'] . '" width="100">';
                 echo '<p>Service: ' . $contact['service'] . '</p>';
                 echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-                echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
                 echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
                 echo '</div>';
                 echo '</div>';
@@ -123,10 +121,10 @@
 
             foreach ($contacts as $id => $contact) {
                 echo '<tr>';
-                echo '<td><a href="#" data-toggle="modal" data-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
+                echo '<td><a href="#" data-bs-toggle="modal" data-bs-target="#contactModal-' . $id . '"><img src="' . $contact['photo'] . '" width="50"></a></td>';
                 echo '<td>' . $contact['nom'] . '</td>';
                 echo '<td>' . $contact['prenom'] . '</td>';
-                echo '<td>' . $contact['numero'] . '</td>';
+                echo '<td>' . $contact['numero_telephone'] . '</td>';
                 echo '<td>' . $contact['mail'] . '</td>';
                 echo '<td>' . $contact['service'] . '</td>';
                 echo '<td>' . $contact['fonction'] . '</td>';
@@ -138,15 +136,13 @@
                 echo '<div class="modal-content">';
                 echo '<div class="modal-header">';
                 echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['nom'] . ' ' . $contact['prenom'] . '</h5>';
-                echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-                echo '<span aria-hidden="true">&times;</span>';
-                echo '</button>';
+                echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
                 echo '</div>';
                 echo '<div class="modal-body">';
                 echo '<img src="' . $contact['photo'] . '" width="100">';
                 echo '<p>Service: ' . $contact['service'] . '</p>';
                 echo '<p>Fonction: ' . $contact['fonction'] . '</p>';
-                echo '<p>Numéro de téléphone: ' . $contact['numero'] . '</p>';
+                echo '<p>Numéro de téléphone: ' . $contact['numero_telephone'] . '</p>';
                 echo '<p>Adresse mail: ' . $contact['mail'] . '</p>';
                 echo '</div>';
                 echo '</div>';
