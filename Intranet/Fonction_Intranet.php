@@ -120,7 +120,7 @@ function connexion($email, $mdp) {
     $users = getUsers();
 
     foreach ($users as $user) {
-        if ($user['email'] === $email) {
+        if (isset($user['email']) && $user['email'] === $email) {
             if (password_verify($mdp, $user['mdp'])) {
                 $_SESSION['user'] = $user['user'];
                 $_SESSION['role'] = $user['role'];
@@ -131,6 +131,7 @@ function connexion($email, $mdp) {
 
     return false;
 }
+
 
 
 
