@@ -47,14 +47,9 @@ if (isset($_GET['search'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
     <?php header_Intranet(); ?>
-</head>
 
-<body>
     <?php navbar_Intranet(); ?>
 
     <div class="container">
