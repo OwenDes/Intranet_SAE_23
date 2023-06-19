@@ -4,7 +4,8 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role']
     header('Location: ../page/connexion.php');
     exit();
 }
-header_Intranet() ?>
+header_Intranet();
+navbar_Intranet(); ?>
     
     
     <div class="container text-center lead">
