@@ -124,6 +124,7 @@ function connexion($email, $mdp) {
             if (password_verify($mdp, $user['mdp'])) {
                 $_SESSION['user'] = $user['user'];
                 $_SESSION['role'] = $user['role'];
+                $_SESSION['grp'] = $user['grp'];
                 return true;
             }
         }
@@ -175,7 +176,8 @@ function addUser($usr, $mdp, $role = "user", $grp = "utilisateur", $lastName = "
         'grp' => $grp,
         'phoneNumber' => $phoneNumber,
         'email' => $email,
-        'matricule' => $matricule
+        'matricule' => $matricule,
+        "photo" => "../images/PhotosAnnuaire/" . substr($matricule, 1) . ".jpg"
     );
 
     file_put_contents('../données/users2.json', json_encode($users));
@@ -205,10 +207,6 @@ function findUsers($texte){
 
     return $resultats;
 }
-
-
-
-
 
 
 function updateUserPassword($username, $newPassword)
