@@ -148,9 +148,9 @@ function findUsers($texte){
     $users = getUsers();
     $resultats = array();
 
-    foreach ($users as $user) {
-        if (stripos($user['user'], $texte) !== false) {
-            $resultats[] = $user;
+    foreach ($users as $username => $user) {
+        if (stripos($username, $texte) !== false) {
+            $resultats[$username] = $user;
         }
     }
 

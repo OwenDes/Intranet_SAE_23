@@ -1,33 +1,23 @@
 <?php
 include '../Fonction_Intranet.php';
-session_start();
-if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
-    header('Location: ../page/connexion.php');
-    exit();
-}
-if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header('Location: ../page/Intranet.php');
-    exit();
-}
-
 header_Intranet();
 navbar_Intranet();
 
-$uploadDir = '../../Intranet/images/Upload/'; // Répertoire de destination des images
-$counter = 1; // Compteur pour les noms de fichier
+$uploadDir = '../../Intranet/images/Upload/';
+$counter = 1;
 
 if (isset($_POST['submit'])) {
-    $allowedExtensions = array('png'); // Extensions de fichiers autorisées
+    $allowedExtensions = array('png','jpg','jpeg');
 
     $fileNames = array_filter($_FILES['images']['name']);
 
     if (!empty($fileNames) && !empty($_POST['description'])) {
-        $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true); // Charger le contenu du fichier JSON existant
+        $partnerData = json_decode(file_get_contents('../données/Partenaires.json'), true);
 
         $description = $_POST['description'];
         if (isset($partnerData) && is_array($partnerData)) {
-            $counter = count($partnerData) + 1; // Obtenir le nombre actuel de partenaires pour la numérotation continue
-        } // Obtenir le nombre actuel de partenaires pour la numérotation continue
+            $counter = count($partnerData) + 1;
+        } 
 
         foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
             $fileName = $_FILES['images']['name'][$key];
@@ -35,22 +25,18 @@ if (isset($_POST['submit'])) {
             $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
             if (in_array($fileExt, $allowedExtensions)) {
-                $newFileName = sprintf('%02d', $counter) . '.png'; // Utilisation de sprintf pour formater le compteur à deux chiffres
+                $newFileName = sprintf('%02d', $counter) . '.png';
                 $destination = $uploadDir . $newFileName;
 
                 if (move_uploaded_file($fileTmp, $destination)) {
-                    // Le fichier a été téléchargé avec succès, vous pouvez effectuer d'autres opérations ici si nécessaire
                     echo 'Le fichier ' . $fileName . ' a été téléchargé avec succès.<br>';
-
                     $data = array(
                         'description' => $description,
-                        'image' => '../../Intranet/images/Upload/' . $newFileName // Ajouter le lien de l'image
+                        'image' => '../../Intranet/images/Upload/' . $newFileName
                     );
 
-                    $partnerData[] = $data; // Ajouter la nouvelle ligne de données
-
+                    $partnerData[] = $data;
                     echo 'Description enregistrée avec succès !<br>';
-
                     $counter++;
                 } else {
                     echo 'Une erreur est survenue lors du téléchargement du fichier ' . $fileName . '.<br>';
@@ -60,9 +46,9 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        $jsonData = json_encode($partnerData); // Convertir le tableau en JSON
+        $jsonData = json_encode($partnerData);
 
-        file_put_contents('../données/Partenaires.json', $jsonData); // Écrire les données dans le fichier JSON
+        file_put_contents('../données/Partenaires.json', $jsonData);
     } else {
         echo 'Veuillez sélectionner au moins une image à télécharger et saisir une description avant de l\'enregistrer.';
     }
