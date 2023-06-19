@@ -1,9 +1,1 @@
-{
-    "admin":{"user":"admin","mdp":"$2y$10$CoalAxcI4w3C63G0AIrRx.B5hTtma6EDiLibZre5\/MSdilJZd2HNS","role":"admin"},
-    "Liam":{"user":"Liam","mdp":"$2y$10$\/t.3HCQaanWbN3hs1QM4nemvWZsqVl2Wfzhlr4TeWVyfXnJMG5tta","role":"admin"},
-    "Alexis":{"user":"Alexis","mdp":"$2y$10$wpfO6cXSi6t7zDX3foJKG.NA0GZUSRiEUMMr4xh.k7MV91zqo1n2a","role":"admin"},
-    "Mathieu":{"user":"Mathieu","mdp":"$2y$10$c7boUcXZKbcZKd9lrXYCku2j4ocRJ7QiUp3fv\/qFfhddBpRAV5rUu","role":"admin"},
-    "Mathis":{"user":"Mathis","mdp":"$2y$10$Ecf9qxs3yAUu7ezEGxZmcuwgT9gO0DNYvADlk6uB7CcDpK\/.gnv\/C","role":"admin"},
-    "Owen":{"user":"Owen","mdp":"$2y$10$pnI1pqT0c9s9Qfon.7pm7uDe8hNSjuUhsuHPp\/Arud0Mk3v0F1Yqa","role":"admin"},
-    "user":{"user":"user","mdp":"$2y$10$LgFIgkuBZX\/rTvGuaB9rounP3\/4qYkTj\/I35MgRGUnnpeabFmksKa","role":"user"}
-}
+{"admin":{"user":"admin","mdp":"$2y$10$CoalAxcI4w3C63G0AIrRx.B5hTtma6EDiLibZre5\/MSdilJZd2HNS","role":"admin"},"user":{"user":"user","mdp":"$2y$10$LgFIgkuBZX\/rTvGuaB9rounP3\/4qYkTj\/I35MgRGUnnpeabFmksKa","role":"user"},"mathis":{"user":"mathis","mdp":"$2y$10$pBh72aBzySVlrmH82gZzHuhEXBZKqk7FC8fH8tbTde8K.Rov0.tmi","role":"user"}}

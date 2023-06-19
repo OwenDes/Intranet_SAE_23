@@ -3,10 +3,10 @@ session_start();
 
 require_once('../Fonction_Intranet.php');
 
-// if (!isset($_SESSION['user']) || $_SESSION['role'] != 'admin') {
-//     header('Location: ../page/connexion.php');
-//     exit();
-// }
+if (!isset($_SESSION['user']) || $_SESSION['role'] != 'admin') {
+     header('Location: ../page/connexion.php');
+     exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = $_POST['action'];
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $users = getUsers();
         $users[$user]['mdp'] = $password;
         $users[$user]['role'] = $role;
-        file_put_contents('data/users.json', json_encode($users));
+        file_put_contents('../données/users2.json', json_encode($users));
     } else if ($action == 'delete') {
         $user = $_POST['user'];
         deleteUser($user);
