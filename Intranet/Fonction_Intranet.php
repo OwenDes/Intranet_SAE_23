@@ -27,20 +27,20 @@ function header_Intranet() {
 }    
 
 function navbar_Intranet(){
-        // Charger le contenu du fichier JSON
+       
         $jsonData = file_get_contents('../données/users2.json');
 
-        // Convertir le contenu JSON en tableau associatif
+        
         $users = json_decode($jsonData, true);
         
-        // Supposons que l'utilisateur actuellement connecté soit stocké dans une variable de session appelée 'user'
+       
         $user = $_SESSION['user'];
         
-        // Rechercher l'utilisateur connecté dans le tableau des utilisateurs
+       
         if (isset($users[$user])) {
           $loggedInUser = $users[$user];
         
-          // Extraire les informations de l'utilisateur connecté
+          
           $email = $loggedInUser['email'];
           $matricule = $loggedInUser['matricule'];
           $role = $loggedInUser['role'];
