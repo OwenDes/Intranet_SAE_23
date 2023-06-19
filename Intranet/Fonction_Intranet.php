@@ -116,6 +116,7 @@ function pagefooter_Intranet() {
   </body>
 </html>';
 }
+
 function connexion($email, $mdp) {
     $users = getUsers();
 
@@ -132,7 +133,6 @@ function connexion($email, $mdp) {
 
     return false;
 }
-
 
 
 
