@@ -1,29 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header('Location: ../page/connexion.php');
-    exit();
-}
 
-require_once('../Fonction_Intranet.php');
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $action = $_POST['action'];
-    if ($action == 'add') {
-        $group = $_POST['group'];
-        $phoneNumber = $_POST['phoneNumber'];
-        addGroup($group, $phoneNumber); 
-    } else if ($action == 'modify') {
-        $group = $_POST['group'];
-        $phoneNumber = $_POST['phoneNumber'];
-        modifyGroup($group, $phoneNumber); 
-    } else if ($action == 'delete') {
-        $group = $_POST['group'];
-        deleteGroup($group); 
-    }
-}
-
-$groups = getGroups(); 
 ?>
 
 <!DOCTYPE html>
