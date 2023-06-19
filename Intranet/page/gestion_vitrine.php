@@ -12,7 +12,7 @@
         </div>
         <div class="col text-center">
             <h1><a href="Gestion_Partenaire.php"><i class="fa-solid fa-handshake" style="color: #000000;"></i></a></h1>
-            <p>Modification des actulaitées</p>
+            <p>Modification des partenaires</p>
         </div>
     </div>
 </div>
