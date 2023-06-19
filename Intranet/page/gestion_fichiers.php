@@ -8,6 +8,9 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role']
 
 header_Intranet();
 navbar_Intranet();
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 ?>
 
 <div class="container">
@@ -18,7 +21,8 @@ navbar_Intranet();
             <label for="fichier" class="form-label">Choisir un fichier :</label>
             <input type="file" class="form-control" id="fichier" name="fichier">
         </div>
-        <button type="submit" name="valider" class="btn btn-primary">Envoyer</button>
+        <hr>
+        <button type="submit" name="valider" class="btn btn-primary mb-2">Envoyer</button>
     </form>
 
     <?php
