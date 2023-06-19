@@ -27,50 +27,72 @@ function header_Intranet() {
 }    
 
 function navbar_Intranet(){
-    echo'<div class="container-fluid">
-    <div class="row">
-        <div class="offcanvas offcanvas-start" id="demo">
-            <div class="offcanvas-header">
-                <i class="fa-sharp fa-solid fa-user fa-2xl img-fluid"></i>
-                <div class="text-center">
-                    <p>Nom:</p><br><p>Prenom:</p>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div>
-                    <p><i class="fa-sharp fa-solid fa-users"></i> Rôle:</p>
-                    <p><i class="fa-solid fa-phone" style="color: #000000;"></i> Numéro</p>
-                    <p><i class="fa-sharp fa-solid fa-address-card"></i> Matricule</p>
-                    <p><i class="fa-sharp fa-solid fa-envelope"></i> Email:</p>
-                    <ul class="nav flex-column text-center mt-4">
-                        <li class="nav-item border">
-                            <a class="nav-link text-dark" href="Intranet.php">Accueil</a>
-                        </li>
-                        <li class="nav-item border">
-                            <a class="nav-link text-dark" href="../traitement/deconnexion_traitement">Déconnexion</a>
-                        </li>
-                        <li class="nav-item border">
-                            <a class="nav-link text-dark" href="#">Paramètres</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="container-fluid">
-                        <div class="container text-center">
-                            <a href="Intranet.php"><img class="img-fluid rounded-circle my-2"src="../images/logo.png" alt="Logo" width="100" height="100"></a>
-                            <p>Suivez-nous sur les réseaux sociaux :</p>
-                            <h3><i class="fa-brands fa-facebook" style="margin-right: 10px; margin-right: 10px";></i><a class="text-black" href="https://www.instagram.com/pompiers.du.listenbourg/"><i class="fa-brands fa-instagram" style="margin-right: 10px; margin-right: 10px";></a></i><a class="text-black"  href="https://twitter.com/PompiersLB"><i class="fa-brands fa-twitter" style="margin-right: 10px; margin-right: 10px";></i></a><i class="fa-brands fa-linkedin" margin-right: 10px";></i></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button class="toggle-button btn btn-primary position-fixed top-0 start-0 mt-2 ms-2 border" data-bs-toggle="offcanvas" data-bs-target="#demo" style="background-color: transparent;">
-    <i class="fas fa-user fa-2x text-dark"></i>
-    </button>';
-}
+        // Charger le contenu du fichier JSON
+        $jsonData = file_get_contents('../données/users2.json');
+
+        // Convertir le contenu JSON en tableau associatif
+        $users = json_decode($jsonData, true);
+        
+        // Supposons que l'utilisateur actuellement connecté soit stocké dans une variable de session appelée 'user'
+        $user = $_SESSION['user'];
+        
+        // Rechercher l'utilisateur connecté dans le tableau des utilisateurs
+        if (isset($users[$user])) {
+          $loggedInUser = $users[$user];
+        
+          // Extraire les informations de l'utilisateur connecté
+          $email = $loggedInUser['email'];
+          $matricule = $loggedInUser['matricule'];
+          $role = $loggedInUser['role'];
+          $phoneNumber = $loggedInUser['phoneNumber'];
+          $lastName = $loggedInUser['lastName'];
+
+
+          echo '<div class="container-fluid">
+          <div class="row">
+              <div class="offcanvas offcanvas-start" id="demo">
+                  <div class="offcanvas-header">
+                      <i class="fa-sharp fa-solid fa-user fa-2xl img-fluid"></i>
+                      <div class="text-center">';
+                      echo "<p>Nom: $lastName</p><br><p>Prénom: $user</p>";
+                      echo '</div>
+                          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                      </div>
+                      <div class="offcanvas-body">
+                          <div>';
+                              echo'<p><i class="fa-sharp fa-solid fa-users"></i>'; echo" Rôle: $role</p>";
+                              echo'<p><i class="fa-solid fa-phone"></i>'; echo" Numéro: $phoneNumber</p>";
+                              echo'<p><i class="fa-sharp fa-solid fa-address-card"></i>';echo" Matricule: $matricule</p>";
+                              echo'<p><i class="fa-sharp fa-solid fa-envelope"></i>'; echo" Email: $email</p>";
+                              echo'<ul class="nav flex-column text-center mt-4">
+                                  <li class="nav-item border">
+                                      <a class="nav-link text-dark" href="Intranet.php">Accueil</a>
+                                  </li>
+                                  <li class="nav-item border">
+                                      <a class="nav-link text-dark" href="../traitement/deconnexion_traitement">Déconnexion</a>
+                                  </li>
+                                  <li class="nav-item border">
+                                      <a class="nav-link text-dark" href="parametre.php">Paramètres</a>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div>
+                              <div class="container-fluid">
+                                  <div class="container text-center">
+                                      <a href="Intranet.php"><img class="img-fluid rounded-circle my-2" src="../images/logo.png" alt="Logo" width="100" height="100"></a>
+                                      <p>Suivez-nous sur les réseaux sociaux :</p>
+                                      <h3><i class="fa-brands fa-facebook" style="margin-right: 10px;"></i><a class="text-black" href="https://www.instagram.com/pompiers.du.listenbourg/"><i class="fa-brands fa-instagram" style="margin-right: 10px;"></a></i><a class="text-black" href="https://twitter.com/PompiersLB"><i class="fa-brands fa-twitter" style="margin-right: 10px;"></i></a><i class="fa-brands fa-linkedin" style="margin-right: 10px;"></i></h3>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      </div>
+                      </div>
+                      <button class="toggle-button btn btn-primary position-fixed top-0 start-0 mt-2 ms-2 border" data-bs-toggle="offcanvas" data-bs-target="#demo" style="background-color: transparent;">
+                          <i class="fas fa-user fa-2x text-dark"></i>
+                      </button>';
+                      
+}}
 function pagefooter_Intranet() {
     echo '<footer>
         <div class="container-fluid bg-white p-3 ">
@@ -157,4 +179,21 @@ function findUsers($texte){
     return $resultats;
 }
 
+
+
+
+
+
+function updateUserPassword($username, $newPassword)
+{
+    $users = getUsers();
+    if (isset($users[$username])) {
+        $users[$username]['mdp'] = password_hash($newPassword, PASSWORD_DEFAULT);
+        file_put_contents('../données/users2.json', json_encode($users));
+        return true;
+    }
+    return false;
+}
+
 ?>
+
