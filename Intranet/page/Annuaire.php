@@ -47,9 +47,9 @@ navbar_Intranet();
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
         // Exécuter la recherche par numéro de téléphone, nom ou adresse e-mail
-        $resultats = rechercherContact($contacts, 'numero', $search);
-        $resultats = array_merge($resultats, rechercherContact($contacts, 'nom', $search));
-        $resultats = array_merge($resultats, rechercherContact($contacts, 'mail', $search));
+        $resultats = rechercherContact($contacts, 'phoneNumber', $search);
+        $resultats = array_merge($resultats, rechercherContact($contacts, 'lastName', $search));
+        $resultats = array_merge($resultats, rechercherContact($contacts, 'email', $search));
 
         // Supprimer les doublons des résultats
         $resultats = array_unique($resultats, SORT_REGULAR);
@@ -88,7 +88,7 @@ navbar_Intranet();
                 echo '<div class="modal-dialog" role="document">';
                 echo '<div class="modal-content">';
                 echo '<div class="modal-header">';
-                echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['nom'] . ' ' . $contact['prenom'] . '</h5>';
+                echo '<h5 class="modal-title" id="contactModalLabel-' . $id . '">' . $contact['lastName'] . ' ' . $contact['user'] . '</h5>';
                 echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
                 echo '</div>';
                 echo '<div class="modal-body">';
@@ -96,7 +96,7 @@ navbar_Intranet();
                 echo '<p>Service: ' . $contact['grp'] . '</p>';
                 echo '<p>Fonction: ' . $contact['matricule'] . '</p>';
                 echo '<p>Numéro de téléphone: ' . $contact['phoneNumber'] . '</p>';
-                echo '<p>Adresse mail: ' . $contact['emaill'] . '</p>';
+                echo '<p>Adresse mail: ' . $contact['email'] . '</p>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
@@ -167,5 +167,3 @@ navbar_Intranet();
     ?>
   </div>
 </div>
-</body>
-</html>

@@ -47,9 +47,9 @@ navbar_Intranet();
     if (isset($_GET['search'])) {
         $search = $_GET['search'];
         // Exécuter la recherche par numéro de téléphone, nom ou adresse e-mail
-        $resultats = rechercherContact($contacts, 'numero', $search);
-        $resultats = array_merge($resultats, rechercherContact($contacts, 'nom', $search));
-        $resultats = array_merge($resultats, rechercherContact($contacts, 'mail', $search));
+        $resultats = rechercherContact($contacts, 'phoneNumber', $search);
+        $resultats = array_merge($resultats, rechercherContact($contacts, 'lastName', $search));
+        $resultats = array_merge($resultats, rechercherContact($contacts, 'email', $search));
 
         // Supprimer les doublons des résultats
         $resultats = array_unique($resultats, SORT_REGULAR);
