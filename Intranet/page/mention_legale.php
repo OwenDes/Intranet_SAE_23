@@ -1,4 +1,12 @@
-<?php include '../Fonction_Intranet.php'; header_Intranet() ; navbar_Intranet() ?>
+<?php include '../Fonction_Intranet.php'; 
+session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
+    header('Location: ../page/connexion.php');
+    exit();
+}
+
+
+header_Intranet() ; navbar_Intranet() ?>
 
 <div class="container-fluid text-center bg-light py-5">
         <h1>Mentions légales</h1>

@@ -1,24 +1,18 @@
     <?php
     include '../Fonction_Intranet.php';
-
-    // if (!isset($_SESSION['user'])) {
-    //     header('Location: ../page/connexion.php');
-    // }
-
-    // Vérifier l'authentification de l'utilisateur et le rôle
     session_start();
-
-    // Vérifiez si l'utilisateur est connecté et si le rôle est "admin"
+    if (!isset($_SESSION['user']) || !isset($_SESSION['role']) || ($_SESSION['role'] != 'user' && $_SESSION['role'] != 'admin')) {
+        header('Location: ../page/connexion.php');
+        exit();
+    }
     if ( $_SESSION['role'] === 'admin'){
         $estAdmin = true;
     } else {
         $estAdmin = false;
     }
-
     header_Intranet();
     navbar_Intranet();
     ?>
-
     <div>
         <hr>
         <h3 class="text-center">Actualitées</h3><br>
