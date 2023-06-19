@@ -30,7 +30,7 @@ navbar_Intranet();
         $file_extension = pathinfo($file['name'], PATHINFO_EXTENSION);
 
         if (!in_array($file_extension, $allowed_extensions)) {
-            $message = "Les fichiers exécutables et les scripts ne sont pas autorisés.";
+            $message = "Seul les fichiers jpeg, jpg, png, pdf et txt sont autorisés.";
             echo '<div class="alert alert-danger" role="alert">' . $message . '</div>';
         } else {
             if ($file['size'] > 10000000) {
