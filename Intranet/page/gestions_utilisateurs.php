@@ -19,25 +19,29 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] != 'admin') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = $_POST['action'];
     if ($action == 'add') {
-        $user = $_POST['user'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $role = $_POST['role'];
-        if ($user!=""){
+        if (isset($_POST['user']) && $_POST['user']!="") {
+            $user = $_POST['user'];
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $role = $_POST['role'];
             addUser($user, $password, $role);
         }    
-    } else if ($action == 'modify') {
-        $user = $_POST['user'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $role = $_POST['role'];
-        $users = getUsers();
-        $users[$user]['mdp'] = $password;
-        $users[$user]['role'] = $role;
-        file_put_contents('../données/users2.json', json_encode($users));
-    } else if ($action == 'delete') {
-        $user = $_POST['user'];
-        deleteUser($user);
+    } else if ($action == 'modify' || $action == 'delete') {
+        if (isset($_POST['user'])) {
+            $user = $_POST['user'];
+            if ($action == 'modify') {
+                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $role = $_POST['role'];
+                $users = getUsers();
+                $users[$user]['mdp'] = $password;
+                $users[$user]['role'] = $role;
+                file_put_contents('../données/users2.json', json_encode($users));
+            } else {
+                deleteUser($user);
+            }
+        }
     }
 }
+
 
 $users = getUsers();
 
