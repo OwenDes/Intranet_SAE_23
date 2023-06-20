@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         $description = $_POST['description'];
         if (isset($partenaires) && is_array($partenaires)) {
             $compteur = count($partenaires) + 1;
-        } 
+        }
 
         foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
             $nomfichier = $_FILES['images']['name'][$key];
@@ -146,7 +146,7 @@ if (!empty($partenaires)) {
         <h1 >Dépôt de votre image :</h1>
         <form method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="images" class="lead"><br>Sélectionnez l'image que vous souhaitez au format PNG :</label><br>
+                <label for="images" class="lead"><br>Sélectionnez l'image que vous souhaitez au format PNG, JPG, JPEG :</label><br>
                 <input type="file" name="images[]" id="images" multiple accept="image/jpeg, image/png" required>
             </div>
             <hr>
