@@ -2,7 +2,7 @@
     "admin": {
         "user": "admin",
         "lastName": "admin",
-        "mdp": "$2y$10$CoalAxcI4w3C63G0AIrRx.B5hTtma6EDiLibZre5\/MSdilJZd2HNS",
+        "mdp": "$2y$10$VIAyJxJyJqU1mSeQmdeGT.3IS63IAEdwkdY.y\/BlSf8kQIoaKEIEG",
         "role": "admin",
         "grp": "ssi",
         "phoneNumber": "1234567890",

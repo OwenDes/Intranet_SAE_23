@@ -1,0 +1,12 @@
+---Se connecter à une branche---
+git switch dev
+ >>> Se connecte à la branche "dev"
+
+---Faire un commit---
+git pull
+git status
+git add *
+git status 
+ >>>Doit renvoyer les fichier modifés en vert !
+git commit -m "messgae"
+git push
